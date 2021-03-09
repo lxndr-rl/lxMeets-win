@@ -174,7 +174,7 @@ namespace lxMeets
             this.horarioexamButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.ForestGreen;
             this.horarioexamButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.horarioexamButton.ForeColor = System.Drawing.Color.Gray;
-            this.horarioexamButton.Location = new System.Drawing.Point(449, 0);
+            this.horarioexamButton.Location = new System.Drawing.Point(491, 0);
             this.horarioexamButton.Name = "horarioexamButton";
             this.horarioexamButton.Size = new System.Drawing.Size(29, 25);
             this.horarioexamButton.TabIndex = 7;
@@ -191,7 +191,7 @@ namespace lxMeets
             this.horarioButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Green;
             this.horarioButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.horarioButton.ForeColor = System.Drawing.Color.Gray;
-            this.horarioButton.Location = new System.Drawing.Point(414, 0);
+            this.horarioButton.Location = new System.Drawing.Point(436, 0);
             this.horarioButton.Name = "horarioButton";
             this.horarioButton.Size = new System.Drawing.Size(29, 25);
             this.horarioButton.TabIndex = 7;
@@ -207,7 +207,7 @@ namespace lxMeets
             this.settingsButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Green;
             this.settingsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.settingsButton.ForeColor = System.Drawing.Color.Gray;
-            this.settingsButton.Location = new System.Drawing.Point(379, 0);
+            this.settingsButton.Location = new System.Drawing.Point(377, 0);
             this.settingsButton.Name = "settingsButton";
             this.settingsButton.Size = new System.Drawing.Size(29, 25);
             this.settingsButton.TabIndex = 7;

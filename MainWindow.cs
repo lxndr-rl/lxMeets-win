@@ -107,6 +107,36 @@ namespace lxMeets
             }
         }
 
+        public async void fetchLatestVer()
+        {
+            try
+            {
+                string url = @"https://lxmeets.lxndr.dev/latest.php";
+                var client = new WebClient();
+                var json = await client.DownloadStringTaskAsync(url);
+                dynamic stuff = JsonConvert.DeserializeObject(json);
+                if (stuff.examen.ToString() == "True")
+                {
+                    horarioexamButton.Visible = true;
+                }
+                else
+                {
+                    horarioexamButton.Visible = false;
+                }
+                if(stuff.latest > Properties.Settings.Default.Version)
+                {
+                    string seleccion = lxMessageBox.Show(stuff.cambios.ToString(), stuff.type.ToString(), lxMessageBox.Buttons.OKCancel, lxMessageBox.Icon.Warning, lxMessageBox.AnimateStyle.FadeIn).ToString();
+                    if (seleccion == "OK")
+                    {
+                        OpenUrl1("https://lxmeets.lxndr.dev/lxmeets.exe");
+                        Properties.Settings.Default.Version = stuff.latest;
+                        Properties.Settings.Default.Save();
+                    }
+                }
+            }
+            catch {  }
+        }
+
         public async void fromKeyboard(object sender, HotkeyEventArgs e)
         {
             e.Handled = true;
@@ -178,13 +208,14 @@ namespace lxMeets
 
         private async void fetchAPI()
         {
+            fetchLatestVer();
             try
             {
+                flowLayoutPanel1.Controls.Clear();
                 string url = @"https://api.lxndr.dev/uae/meets/?dia=" + comboBox1.GetItemText(comboBox1.SelectedItem);
                 var client = new WebClient();
                 var json = await client.DownloadStringTaskAsync(url);
                 dynamic stuff = JsonConvert.DeserializeObject(json);
-                flowLayoutPanel1.Controls.Clear();
 
                 foreach (var s in stuff)
                 {
@@ -253,7 +284,6 @@ namespace lxMeets
                 }
             }
         }
-
 
         private void ShowAlert(object sender, EventArgs e, string materia, string horas, string url)
         {

@@ -58,8 +58,9 @@ namespace lxMeets
 
         private void stoprecord_Click(object sender, EventArgs e)
         {
-            try { 
-            keyboardShortCutText.Text = keyboardShortCutText.Text.Remove(keyboardShortCutText.Text.Length - 3);
+            try
+            {
+                keyboardShortCutText.Text = keyboardShortCutText.Text.Remove(keyboardShortCutText.Text.Length - 3);
             }
             catch
             {

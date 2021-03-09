@@ -17,7 +17,7 @@ namespace lxMeets
                 tipo = "horarioex.png";
             }
             else tipo = "nicki-loop.gif";
-            horarioPicture.LoadAsync("https://lxndr.dev/uae/res/"+tipo);
+            horarioPicture.LoadAsync("https://lxndr.dev/uae/res/" + tipo);
 
         }
 
@@ -25,6 +25,6 @@ namespace lxMeets
         {
             this.Close();
         }
-        
+
     }
 }

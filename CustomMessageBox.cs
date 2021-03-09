@@ -341,7 +341,7 @@ namespace lxMsgBox
         private void InitOKButton()
         {
             Button btnOK = new Button();
-            btnOK.Text = "OK";
+            btnOK.Text = "Actualizar";
             btnOK.Click += ButtonClick;
 
             this._buttonCollection.Add(btnOK);
@@ -350,7 +350,7 @@ namespace lxMsgBox
         private void InitOKCancelButtons()
         {
             Button btnOK = new Button();
-            btnOK.Text = "OK";
+            btnOK.Text = "Actualizar";
             btnOK.Click += ButtonClick;
 
             Button btnCancel = new Button();
@@ -429,7 +429,7 @@ namespace lxMsgBox
                     _buttonResult = DialogResult.Ignore;
                     break;
 
-                case "OK":
+                case "Actualizar":
                     _buttonResult = DialogResult.OK;
                     break;
 
