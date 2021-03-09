@@ -43,12 +43,12 @@ namespace lxMeets
             RegisterInStartup(Properties.Settings.Default.FirstRun);
             if (Properties.Settings.Default.FirstRun)
             {
-                string seleccion = lxMessageBox.Show("La aplicación corre en segundo plano incluso cuando se presiona X\n\nPuede usar el atajo (Ctrl Alt -) para abrir la clase actual.\n\nLas alertas se muestran 5 minutos antes de una clase y al empezar la clase.\n\nLa aplicación se abre al iniciar windows", "lxMeets", lxMessageBox.Buttons.OK, lxMessageBox.Icon.Warning, lxMessageBox.AnimateStyle.FadeIn).ToString();
+                lxMessageBox.Show("La aplicación corre en segundo plano incluso cuando se presiona X\n\nPuede usar el atajo (Ctrl Alt -) para abrir la clase actual.\n\nLas alertas se muestran 5 minutos antes de una clase y al empezar la clase.\n\nLa aplicación se abre al iniciar windows", "lxMeets " + Properties.Settings.Default.Version, lxMessageBox.Buttons.OK, lxMessageBox.Icon.Warning, lxMessageBox.AnimateStyle.FadeIn).ToString();
                 Properties.Settings.Default.FirstRun = false;
                 Properties.Settings.Default.Save();
             }
 
-            var aTimer = new System.Timers.Timer(1000 * 31);
+            var aTimer = new System.Timers.Timer(1000 * 30);
             int lastHour1 = DateTime.Now.Hour;
             int lastHour2 = DateTime.Now.Hour;
             aTimer.Elapsed += new ElapsedEventHandler(TriggerNotif);
@@ -123,7 +123,7 @@ namespace lxMeets
                 {
                     horarioexamButton.Visible = false;
                 }
-                if(stuff.latest > Properties.Settings.Default.Version)
+                if (stuff.latest > Properties.Settings.Default.Version)
                 {
                     string seleccion = lxMessageBox.Show(stuff.cambios.ToString(), stuff.type.ToString(), lxMessageBox.Buttons.OKCancel, lxMessageBox.Icon.Warning, lxMessageBox.AnimateStyle.FadeIn).ToString();
                     if (seleccion == "OK")
@@ -134,7 +134,7 @@ namespace lxMeets
                     }
                 }
             }
-            catch {  }
+            catch { }
         }
 
         public async void fromKeyboard(object sender, HotkeyEventArgs e)
