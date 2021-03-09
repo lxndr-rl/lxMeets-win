@@ -39,12 +39,12 @@ namespace lxMeets
             this.label2 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.BarraTitulo = new System.Windows.Forms.Panel();
+            this.githubButton = new System.Windows.Forms.Button();
             this.openlxndrButton = new System.Windows.Forms.Button();
             this.horarioexamButton = new System.Windows.Forms.Button();
             this.horarioButton = new System.Windows.Forms.Button();
             this.settingsButton = new System.Windows.Forms.Button();
             this.closeButton = new System.Windows.Forms.Button();
-            this.githubButton = new System.Windows.Forms.Button();
             this.BarraTitulo.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -134,6 +134,22 @@ namespace lxMeets
             this.BarraTitulo.TabIndex = 6;
             this.BarraTitulo.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BarraTitulo_MouseDown);
             // 
+            // githubButton
+            // 
+            this.githubButton.BackColor = System.Drawing.Color.Transparent;
+            this.githubButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("githubButton.BackgroundImage")));
+            this.githubButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.githubButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Green;
+            this.githubButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.githubButton.ForeColor = System.Drawing.Color.Gray;
+            this.githubButton.Location = new System.Drawing.Point(35, 0);
+            this.githubButton.Name = "githubButton";
+            this.githubButton.Size = new System.Drawing.Size(29, 25);
+            this.githubButton.TabIndex = 7;
+            this.githubButton.UseVisualStyleBackColor = false;
+            this.githubButton.Click += new System.EventHandler(this.githubButton_Click);
+            this.githubButton.MouseHover += new System.EventHandler(this.githubButton_MouseHover);
+            // 
             // openlxndrButton
             // 
             this.openlxndrButton.BackColor = System.Drawing.Color.Transparent;
@@ -213,22 +229,6 @@ namespace lxMeets
             this.closeButton.TabIndex = 7;
             this.closeButton.UseVisualStyleBackColor = false;
             this.closeButton.Click += new System.EventHandler(this.button1_Click_1);
-            // 
-            // githubButton
-            // 
-            this.githubButton.BackColor = System.Drawing.Color.Transparent;
-            this.githubButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("githubButton.BackgroundImage")));
-            this.githubButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.githubButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Green;
-            this.githubButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.githubButton.ForeColor = System.Drawing.Color.Gray;
-            this.githubButton.Location = new System.Drawing.Point(35, 0);
-            this.githubButton.Name = "githubButton";
-            this.githubButton.Size = new System.Drawing.Size(29, 25);
-            this.githubButton.TabIndex = 7;
-            this.githubButton.UseVisualStyleBackColor = false;
-            this.githubButton.Click += new System.EventHandler(this.githubButton_Click);
-            this.githubButton.MouseHover += new System.EventHandler(this.githubButton_MouseHover);
             // 
             // lxMeets
             // 
