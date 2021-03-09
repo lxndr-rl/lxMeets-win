@@ -500,6 +500,5 @@ C:\Users\w1nd0ws\Documents\lxndr\visual studio\lxMeets\obj\Release\netcoreapp3.1
 C:\Users\w1nd0ws\Documents\lxndr\visual studio\lxMeets\obj\Release\netcoreapp3.1\win-x86\lxMeets.pdb
 C:\Users\w1nd0ws\Documents\lxndr\visual studio\lxMeets\obj\Release\netcoreapp3.1\win-x86\lxMeets.genruntimeconfig.cache
 C:\Users\w1nd0ws\Documents\lxndr\visual studio\lxMeets\obj\Release\netcoreapp3.1\win-x86\lxMeets.Properties.Resources.resources
-C:\Users\w1nd0ws\Documents\lxndr\visual studio\lxMeets\bin\Release\netcoreapp3.1\win-x86\Microsoft.Extensions.Logging.Abstractions.dll
-C:\Users\w1nd0ws\Documents\lxndr\visual studio\lxMeets\bin\Release\netcoreapp3.1\win-x86\Quartz.dll
 C:\Users\w1nd0ws\Documents\lxndr\visual studio\lxMeets\obj\Release\netcoreapp3.1\win-x86\lxMeets.SettingsWindow.resources
+C:\Users\w1nd0ws\Documents\lxndr\visual studio\lxMeets\obj\Release\netcoreapp3.1\win-x86\lxMeets.ScheduleWindow.resources
