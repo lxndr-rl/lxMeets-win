@@ -146,7 +146,7 @@ namespace lxMeets
             this.notasButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Green;
             this.notasButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.notasButton.ForeColor = System.Drawing.Color.Gray;
-            this.notasButton.Location = new System.Drawing.Point(342, 0);
+            this.notasButton.Location = new System.Drawing.Point(331, 0);
             this.notasButton.Name = "notasButton";
             this.notasButton.Size = new System.Drawing.Size(29, 25);
             this.notasButton.TabIndex = 7;
@@ -271,10 +271,10 @@ namespace lxMeets
             this.ClientSize = new System.Drawing.Size(845, 572);
             this.ControlBox = false;
             this.Controls.Add(this.cargandoAPI);
+            this.CenterToScreen();
             this.Controls.Add(this.BarraTitulo);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.label2);
-            this.CenterToScreen();
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.reloadButton);

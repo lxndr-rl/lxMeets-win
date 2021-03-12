@@ -45,7 +45,6 @@ namespace lxMeets
                 if (cedula.Length == 0) this.Close();
                 var json = await client.DownloadStringTaskAsync(url);
                 dynamic stuff = JsonConvert.DeserializeObject(json);
-                cargandoPicture.Visible = false;
                 if ((bool)stuff.error) { MessageBox.Show(stuff.message.ToString()); this.Close(); }
                 otraCButton.Visible = true;
                 nombresLabel.Text = stuff.apellidos + " " + stuff.nombres;
@@ -53,6 +52,7 @@ namespace lxMeets
                 facultadLabel.Text = stuff.facultad;
                 GenerateTable(stuff.parciales.Count, stuff.parciales[0].Count, tablaParcial, stuff, "parciales");
                 GenerateTable(stuff.promedios.Count, stuff.promedios[0].Count, tablaPromedio, stuff, "promedios");
+                cargandoPicture.Visible = false;
             }
             catch (Exception e) { }
         }
@@ -68,20 +68,27 @@ namespace lxMeets
 
             for (int x = 0; x < columnCount; x++)
             {
-                tableController.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
+                //tableController.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
 
                 for (int y = 0; y < rowCount; y++)
                 {
-                    string toWrite = stuff[tipo][y][x].ToString();
-                    Console.WriteLine(toWrite);
-                    if (x == 0)
-                    {
-                        tableController.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-                    }
+                    //if (x == 0)
+                    //{
+                    //    tableController.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+                    //}
 
                     Label cmd = new Label();
+                    cmd.AutoSize = true;
+                    if (y == 0)
+                    {
+                        cmd.AutoSize = false;
+                        cmd.TextAlign = ContentAlignment.MiddleCenter;
+                        cmd.Font = new Font(cmd.Font, FontStyle.Bold);
+                        cmd.Dock = DockStyle.None;
+                    }
+
                     cmd.ForeColor = Color.White;
-                    cmd.Text = toWrite;
+                    cmd.Text = stuff[tipo][y][x].ToString();
                     tableController.Controls.Add(cmd, x, y);
                 }
             }

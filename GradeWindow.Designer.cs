@@ -58,6 +58,9 @@
             // 
             // tablaParcial
             // 
+            this.tablaParcial.AutoSize = true;
+            this.tablaParcial.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.tablaParcial.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.tablaParcial.ColumnCount = 2;
             this.tablaParcial.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tablaParcial.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -66,11 +69,14 @@
             this.tablaParcial.RowCount = 2;
             this.tablaParcial.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tablaParcial.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tablaParcial.Size = new System.Drawing.Size(843, 257);
+            this.tablaParcial.Size = new System.Drawing.Size(3, 3);
             this.tablaParcial.TabIndex = 1;
             // 
             // tablaPromedio
             // 
+            this.tablaPromedio.AutoSize = true;
+            this.tablaPromedio.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.tablaPromedio.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.tablaPromedio.ColumnCount = 2;
             this.tablaPromedio.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tablaPromedio.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -79,7 +85,7 @@
             this.tablaPromedio.RowCount = 2;
             this.tablaPromedio.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tablaPromedio.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tablaPromedio.Size = new System.Drawing.Size(843, 257);
+            this.tablaPromedio.Size = new System.Drawing.Size(3, 3);
             this.tablaPromedio.TabIndex = 1;
             // 
             // label1
@@ -140,7 +146,7 @@
             this.cargandoPicture.Image = ((System.Drawing.Image)(resources.GetObject("cargandoPicture.Image")));
             this.cargandoPicture.Location = new System.Drawing.Point(2, -1);
             this.cargandoPicture.Name = "cargandoPicture";
-            this.cargandoPicture.Size = new System.Drawing.Size(907, 658);
+            this.cargandoPicture.Size = new System.Drawing.Size(905, 627);
             this.cargandoPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.cargandoPicture.TabIndex = 3;
             this.cargandoPicture.TabStop = false;
@@ -173,8 +179,8 @@
             this.Controls.Add(this.nombresLabel);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.CenterToScreen();
             this.Controls.Add(this.tablaPromedio);
+            this.CenterToScreen();
             this.Controls.Add(this.tablaParcial);
             this.Controls.Add(this.closeButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
