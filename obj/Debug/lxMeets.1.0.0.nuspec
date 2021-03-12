@@ -13,7 +13,6 @@
       <group targetFramework=".NETCoreApp3.1">
         <dependency id="NHotkey.WindowsForms" version="2.1.0" exclude="Build,Analyzers" />
         <dependency id="Newtonsoft.Json" version="12.0.3" exclude="Build,Analyzers" />
-        <dependency id="Quartz" version="3.2.4" exclude="Build,Analyzers" />
       </group>
     </dependencies>
     <frameworkReferences>
