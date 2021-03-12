@@ -502,3 +502,4 @@ C:\Users\w1nd0ws\Documents\lxndr\visual studio\lxMeets\obj\Release\netcoreapp3.1
 C:\Users\w1nd0ws\Documents\lxndr\visual studio\lxMeets\obj\Release\netcoreapp3.1\win-x86\lxMeets.Properties.Resources.resources
 C:\Users\w1nd0ws\Documents\lxndr\visual studio\lxMeets\obj\Release\netcoreapp3.1\win-x86\lxMeets.SettingsWindow.resources
 C:\Users\w1nd0ws\Documents\lxndr\visual studio\lxMeets\obj\Release\netcoreapp3.1\win-x86\lxMeets.ScheduleWindow.resources
+C:\Users\w1nd0ws\Documents\lxndr\visual studio\lxMeets\obj\Release\netcoreapp3.1\win-x86\lxMeets.GradeWindow.resources

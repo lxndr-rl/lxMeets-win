@@ -94,5 +94,17 @@ namespace lxMeets.Properties {
                 this["Version"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public string Cedula {
+            get {
+                return ((string)(this["Cedula"]));
+            }
+            set {
+                this["Cedula"] = value;
+            }
+        }
     }
 }

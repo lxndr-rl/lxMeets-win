@@ -11,7 +11,6 @@ namespace lxMeets
     public partial class SettingsWindow : Form
     {
         private bool recording = false;
-        private List<String> list = new List<String>();
         public SettingsWindow()
         {
             InitializeComponent();
@@ -108,6 +107,21 @@ namespace lxMeets
             }
 
 
+        }
+
+        private void sendNotificationsCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            if (sendNotificationsCheck.Checked)
+            {
+                Properties.Settings.Default.Notifications = true;
+                Properties.Settings.Default.Save();
+
+            }
+            else
+            {
+                Properties.Settings.Default.Notifications = false;
+                Properties.Settings.Default.Save();
+            }
         }
     }
 }

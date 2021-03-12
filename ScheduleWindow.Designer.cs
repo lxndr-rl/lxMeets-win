@@ -66,11 +66,11 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
             this.ClientSize = new System.Drawing.Size(902, 596);
             this.Controls.Add(this.closeButton);
-            this.CenterToScreen();
             this.Controls.Add(this.horarioPicture);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ScheduleWindow";
+            this.CenterToScreen();
             this.Opacity = 0.85D;
             this.Text = "lxMSettings";
             ((System.ComponentModel.ISupportInitialize)(this.horarioPicture)).EndInit();

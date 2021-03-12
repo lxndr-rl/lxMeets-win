@@ -17,7 +17,9 @@ namespace lxMeets
     {
         private static int lastHour1;
         private static int lastHour2;
+        FormCollection fc = Application.OpenForms;
         ToolTip ToolTip1 = new ToolTip();
+        WebClient client = new WebClient();
 
         public lxMeets()
         {
@@ -27,6 +29,7 @@ namespace lxMeets
                 Process[] instances = Process.GetProcessesByName(processName);
                 if (instances.Length > 1) return; else this.Show();
                 InitializeComponent();
+                fetchLatestVer();
                 fetchAPI();
             }
             catch { }
@@ -44,15 +47,16 @@ namespace lxMeets
             if (Properties.Settings.Default.FirstRun)
             {
                 lxMessageBox.Show("La aplicación corre en segundo plano incluso cuando se presiona X\n\nPuede usar el atajo (Ctrl Alt -) para abrir la clase actual.\n\nLas alertas se muestran 5 minutos antes de una clase y al empezar la clase.\n\nLa aplicación se abre al iniciar windows", "lxMeets " + Properties.Settings.Default.Version, lxMessageBox.Buttons.OK, lxMessageBox.Icon.Warning, lxMessageBox.AnimateStyle.FadeIn).ToString();
+                authUser(lxMessageInputBox.ShowDialog("Ingresa tu número de cédula", "Ingresa tu número de cédula"));
                 Properties.Settings.Default.FirstRun = false;
                 Properties.Settings.Default.Save();
             }
-
             var aTimer = new System.Timers.Timer(1000 * 30);
             int lastHour1 = DateTime.Now.Hour;
             int lastHour2 = DateTime.Now.Hour;
             aTimer.Elapsed += new ElapsedEventHandler(TriggerNotif);
             aTimer.Start();
+
         }
 
         private void RegisterInStartup(bool isChecked)
@@ -112,17 +116,10 @@ namespace lxMeets
             try
             {
                 string url = @"https://lxmeets.lxndr.dev/latest.php";
-                var client = new WebClient();
                 var json = await client.DownloadStringTaskAsync(url);
                 dynamic stuff = JsonConvert.DeserializeObject(json);
-                if (stuff.examen.ToString() == "True")
-                {
-                    horarioexamButton.Visible = true;
-                }
-                else
-                {
-                    horarioexamButton.Visible = false;
-                }
+                if ((bool)stuff.examen) horarioexamButton.Visible = true;
+                if ((bool)stuff.notas) notasButton.Visible = true;
                 if (stuff.latest > Properties.Settings.Default.Version)
                 {
                     string seleccion = lxMessageBox.Show(stuff.cambios.ToString(), stuff.type.ToString(), lxMessageBox.Buttons.OKCancel, lxMessageBox.Icon.Warning, lxMessageBox.AnimateStyle.FadeIn).ToString();
@@ -137,13 +134,32 @@ namespace lxMeets
             catch { }
         }
 
+        public async void authUser(string cedula)
+        {
+            try
+            {
+                string url = @"https://api.lxndr.dev/uae/estudiantes/?cedula=" + cedula;
+                var json = await client.DownloadStringTaskAsync(url);
+                dynamic stuff = JsonConvert.DeserializeObject(json);
+                if ((bool)stuff.error)
+                {
+                    MessageBox.Show(stuff.message.ToString());
+                }
+                else
+                {
+                    Properties.Settings.Default.Cedula = cedula;
+                    Properties.Settings.Default.Save();
+                }
+            }
+            catch { }
+        }
+
         public async void fromKeyboard(object sender, HotkeyEventArgs e)
         {
             e.Handled = true;
             try
             {
                 string url = @"https://api.lxndr.dev/uae/meets/exacto.php";
-                var client = new WebClient();
                 var json = await client.DownloadStringTaskAsync(url);
                 dynamic stuff = JsonConvert.DeserializeObject(json);
                 if (stuff.materia.ToString() == "No hay nada por ahora")
@@ -208,7 +224,7 @@ namespace lxMeets
 
         private async void fetchAPI()
         {
-            fetchLatestVer();
+            cargandoAPI.Visible = true;
             try
             {
                 flowLayoutPanel1.Controls.Clear();
@@ -219,7 +235,7 @@ namespace lxMeets
 
                 foreach (var s in stuff)
                 {
-                    if (s.materia.ToString() == "No hay nada por ahora") return;
+                    if (s.materia.ToString() == "No hay nada por ahora") { cargandoAPI.Visible = false; return; }
                     Button l = addButton(s.materia.ToString(), s.hora.ToString());
                     flowLayoutPanel1.Controls.Add(l);
                     l.Click += delegate (object sender, EventArgs e) { ShowAlert(sender, e, s.materia.ToString(), s.hora.ToString(), s.url.ToString()); };
@@ -227,6 +243,7 @@ namespace lxMeets
                 }
             }
             catch { }
+            cargandoAPI.Visible = false;
         }
 
         private void OpenUrl1(string url)
@@ -308,7 +325,7 @@ namespace lxMeets
             try
             {
                 string url = @"https://api.lxndr.dev/uae/meets/exacto.php?hora=" + RoundUp(DateTime.Parse(DateTime.Now.ToString("HH") + ":" + DateTime.Now.ToString("mm") + ":00"), TimeSpan.FromMinutes(15)).ToShortTimeString();
-                var client = new WebClient();
+
                 var json = await client.DownloadStringTaskAsync(url);
                 dynamic stuff = JsonConvert.DeserializeObject(json);
                 if (stuff.materia.ToString() == "No hay nada por ahora" || !Properties.Settings.Default.Notifications) return;
@@ -316,6 +333,7 @@ namespace lxMeets
                 notifyIcon1.BalloonTipText = "Dentro de 5 minutos: " + stuff.materia.ToString();
                 notifyIcon1.ShowBalloonTip(1000);
                 notifyIcon1.BalloonTipClicked += delegate (object sender, EventArgs e) { OpenUrl2(sender, e, stuff.url.ToString()); };
+                notifyIcon1.Click += delegate (object sender, EventArgs e) { OpenUrl2(sender, e, stuff.url.ToString()); };
             }
             catch { }
         }
@@ -324,7 +342,6 @@ namespace lxMeets
             try
             {
                 string url = @"https://api.lxndr.dev/uae/meets/exacto.php";
-                var client = new WebClient();
                 var json = await client.DownloadStringTaskAsync(url);
                 dynamic stuff = JsonConvert.DeserializeObject(json);
                 if (stuff.materia.ToString() == "No hay nada por ahora" || !Properties.Settings.Default.Notifications) return;
@@ -332,6 +349,7 @@ namespace lxMeets
                 notifyIcon1.BalloonTipText = stuff.hora.ToString();
                 notifyIcon1.ShowBalloonTip(1000);
                 notifyIcon1.BalloonTipClicked += delegate (object sender, EventArgs e) { OpenUrl2(sender, e, stuff.url.ToString()); };
+                notifyIcon1.Click += delegate (object sender, EventArgs e) { OpenUrl2(sender, e, stuff.url.ToString()); };
             }
             catch { }
         }
@@ -377,8 +395,15 @@ namespace lxMeets
         }
         private void settings_Click(object sender, EventArgs e)
         {
-            SettingsWindow Settings = new SettingsWindow();
-            Settings.ShowDialog();
+            bool exist = false;
+            foreach (Form frm in fc)
+            {
+                if (frm.Name == "SettingsWindow")
+                {
+                    exist = true;
+                }
+            }
+            if (!exist) { SettingsWindow Settings = new SettingsWindow(); Settings.Show(); }
         }
 
         private void settingsButton_MouseHover(object sender, EventArgs e)
@@ -398,14 +423,30 @@ namespace lxMeets
 
         private void horarioexamButton_Click(object sender, EventArgs e)
         {
-            ScheduleWindow horarioEx = new ScheduleWindow("Examen");
-            horarioEx.Show();
+            bool exist = false;
+            foreach (Form frm in fc)
+            {
+                if (frm.Name == "ScheduleWindow")
+                {
+                    exist = true;
+                }
+            }
+            if (!exist) { ScheduleWindow horarioEx = new ScheduleWindow("Examen"); horarioEx.Show(); }
+
         }
 
         private void horarioButton_Click(object sender, EventArgs e)
         {
-            ScheduleWindow horarioEx = new ScheduleWindow("Clase");
-            horarioEx.Show();
+
+            bool exist = false;
+            foreach (Form frm in fc)
+            {
+                if (frm.Name == "ScheduleWindow")
+                {
+                    exist = true;
+                }
+            }
+            if (!exist) { ScheduleWindow horarioEx = new ScheduleWindow("Clase"); horarioEx.Show(); }
         }
 
         private void openlxndrButton_MouseHover(object sender, EventArgs e)
@@ -426,6 +467,27 @@ namespace lxMeets
         private void githubButton_MouseHover(object sender, EventArgs e)
         {
             ToolTip1.SetToolTip(this.githubButton, "Ver código fuente");
+        }
+
+        private void notasButton_MouseHover(object sender, EventArgs e)
+        {
+            ToolTip1.SetToolTip(this.notasButton, "Consulta calificaciones");
+        }
+
+        private void notasButton_Click(object sender, EventArgs e)
+        {
+
+
+            bool exist = false;
+            foreach (Form frm in fc)
+            {
+                if (frm.Name == "GradeWindow")
+                {
+                    exist = true;
+                }
+            }
+            if (!exist) { GradeWindow notas = new GradeWindow(); notas.Show(); }
+
         }
     }
 }

@@ -141,6 +141,7 @@
             this.sendNotificationsCheck.TabIndex = 1;
             this.sendNotificationsCheck.Text = "Notificaciones";
             this.sendNotificationsCheck.UseVisualStyleBackColor = true;
+            this.sendNotificationsCheck.CheckedChanged += new System.EventHandler(this.sendNotificationsCheck_CheckedChanged);
             // 
             // SettingsWindow
             // 
@@ -151,7 +152,6 @@
             this.Controls.Add(this.sendNotificationsCheck);
             this.Controls.Add(this.useKeyboardCheck);
             this.Controls.Add(this.groupBox1);
-            this.CenterToScreen();
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.autoRunCheck);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -161,6 +161,7 @@
             this.Text = "lxMSettings";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyPress);
             this.groupBox1.ResumeLayout(false);
+            this.CenterToScreen();
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();

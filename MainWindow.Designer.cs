@@ -39,13 +39,16 @@ namespace lxMeets
             this.label2 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.BarraTitulo = new System.Windows.Forms.Panel();
+            this.notasButton = new System.Windows.Forms.Button();
             this.githubButton = new System.Windows.Forms.Button();
             this.openlxndrButton = new System.Windows.Forms.Button();
             this.horarioexamButton = new System.Windows.Forms.Button();
             this.horarioButton = new System.Windows.Forms.Button();
             this.settingsButton = new System.Windows.Forms.Button();
             this.closeButton = new System.Windows.Forms.Button();
+            this.cargandoAPI = new System.Windows.Forms.PictureBox();
             this.BarraTitulo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cargandoAPI)).BeginInit();
             this.SuspendLayout();
             // 
             // reloadButton
@@ -121,6 +124,7 @@ namespace lxMeets
             // BarraTitulo
             // 
             this.BarraTitulo.BackColor = System.Drawing.Color.Gray;
+            this.BarraTitulo.Controls.Add(this.notasButton);
             this.BarraTitulo.Controls.Add(this.githubButton);
             this.BarraTitulo.Controls.Add(this.openlxndrButton);
             this.BarraTitulo.Controls.Add(this.horarioexamButton);
@@ -133,6 +137,23 @@ namespace lxMeets
             this.BarraTitulo.Size = new System.Drawing.Size(845, 25);
             this.BarraTitulo.TabIndex = 6;
             this.BarraTitulo.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BarraTitulo_MouseDown);
+            // 
+            // notasButton
+            // 
+            this.notasButton.BackColor = System.Drawing.Color.Transparent;
+            this.notasButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("notasButton.BackgroundImage")));
+            this.notasButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.notasButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Green;
+            this.notasButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.notasButton.ForeColor = System.Drawing.Color.Gray;
+            this.notasButton.Location = new System.Drawing.Point(342, 0);
+            this.notasButton.Name = "notasButton";
+            this.notasButton.Size = new System.Drawing.Size(29, 25);
+            this.notasButton.TabIndex = 7;
+            this.notasButton.UseVisualStyleBackColor = false;
+            this.notasButton.Visible = false;
+            this.notasButton.Click += new System.EventHandler(this.notasButton_Click);
+            this.notasButton.MouseHover += new System.EventHandler(this.notasButton_MouseHover);
             // 
             // githubButton
             // 
@@ -230,6 +251,18 @@ namespace lxMeets
             this.closeButton.UseVisualStyleBackColor = false;
             this.closeButton.Click += new System.EventHandler(this.button1_Click_1);
             // 
+            // cargandoAPI
+            // 
+            this.cargandoAPI.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("cargandoAPI.BackgroundImage")));
+            this.cargandoAPI.Image = ((System.Drawing.Image)(resources.GetObject("cargandoAPI.Image")));
+            this.cargandoAPI.Location = new System.Drawing.Point(377, 146);
+            this.cargandoAPI.Name = "cargandoAPI";
+            this.cargandoAPI.Size = new System.Drawing.Size(93, 56);
+            this.cargandoAPI.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.cargandoAPI.TabIndex = 0;
+            this.cargandoAPI.TabStop = false;
+            this.cargandoAPI.Visible = false;
+            // 
             // lxMeets
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -237,9 +270,11 @@ namespace lxMeets
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
             this.ClientSize = new System.Drawing.Size(845, 572);
             this.ControlBox = false;
+            this.Controls.Add(this.cargandoAPI);
             this.Controls.Add(this.BarraTitulo);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.label2);
+            this.CenterToScreen();
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.reloadButton);
@@ -252,6 +287,7 @@ namespace lxMeets
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "lxMeets";
             this.BarraTitulo.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.cargandoAPI)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -272,6 +308,8 @@ namespace lxMeets
         private System.Windows.Forms.Button horarioexamButton;
         private System.Windows.Forms.Button openlxndrButton;
         private System.Windows.Forms.Button githubButton;
+        private System.Windows.Forms.Button notasButton;
+        private System.Windows.Forms.PictureBox cargandoAPI;
     }
 }
 
