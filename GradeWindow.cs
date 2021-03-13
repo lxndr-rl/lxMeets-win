@@ -41,7 +41,7 @@ namespace lxMeets
              */
             try
             {
-                string url = @"https://api.lxndr.dev/uae/notas/?ced=" + cedula + "&aLect";
+                string url = @"https://api.lxndr.dev/uae/notas/?ced=" + cedula;
                 if (cedula.Length == 0) this.Close();
                 var json = await client.DownloadStringTaskAsync(url);
                 dynamic stuff = JsonConvert.DeserializeObject(json);
@@ -68,14 +68,14 @@ namespace lxMeets
 
             for (int x = 0; x < columnCount; x++)
             {
-                //tableController.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
+                tableController.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
 
                 for (int y = 0; y < rowCount; y++)
                 {
-                    //if (x == 0)
-                    //{
-                    //    tableController.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-                    //}
+                    if (x == 0)
+                    {
+                        tableController.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+                    }
 
                     Label cmd = new Label();
                     cmd.AutoSize = true;
@@ -111,7 +111,10 @@ namespace lxMeets
             }
 
             cargandoPicture.Visible = true;
+            otraCButton.Visible = false;
             if (cedula == "Cancel") this.Close();
+
+            fetchAPI(cedula);
         }
 
         private void GradeWindow_Shown(object sender, EventArgs e)

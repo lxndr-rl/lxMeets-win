@@ -13,6 +13,7 @@
     <NeutralLanguage>es-EC</NeutralLanguage>
     <StartupObject></StartupObject>
     <Nullable>disable</Nullable>
+    <Version>1.1.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
