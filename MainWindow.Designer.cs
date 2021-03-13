@@ -271,10 +271,10 @@ namespace lxMeets
             this.ClientSize = new System.Drawing.Size(845, 572);
             this.ControlBox = false;
             this.Controls.Add(this.cargandoAPI);
-            this.CenterToScreen();
             this.Controls.Add(this.BarraTitulo);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.label2);
+            this.CenterToScreen();
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.reloadButton);

@@ -2,6 +2,7 @@
 using System;
 using System.Drawing;
 using System.Net;
+using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -41,6 +42,10 @@ namespace lxMeets
              */
             try
             {
+                label1.Visible = false;
+                label2.Visible = false;
+                tablaParcial.Visible = false;
+                tablaPromedio.Visible = false;
                 string url = @"https://api.lxndr.dev/uae/notas/?ced=" + cedula;
                 if (cedula.Length == 0) this.Close();
                 var json = await client.DownloadStringTaskAsync(url);
@@ -52,6 +57,10 @@ namespace lxMeets
                 facultadLabel.Text = stuff.facultad;
                 GenerateTable(stuff.parciales.Count, stuff.parciales[0].Count, tablaParcial, stuff, "parciales");
                 GenerateTable(stuff.promedios.Count, stuff.promedios[0].Count, tablaPromedio, stuff, "promedios");
+                label1.Visible = true;
+                label2.Visible = true;
+                tablaParcial.Visible = true;
+                tablaPromedio.Visible = true;
                 cargandoPicture.Visible = false;
             }
             catch (Exception e) { }
@@ -94,12 +103,6 @@ namespace lxMeets
             }
         }
 
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
         private void otraCButton_Click(object sender, EventArgs e)
         {
             cedula = lxMessageInputBox.ShowDialog("Ingresar número de cédula", "Ingresar número de cédula");
@@ -120,6 +123,22 @@ namespace lxMeets
         private void GradeWindow_Shown(object sender, EventArgs e)
         {
             if (cedula == "Cancel") this.Close();
+        }
+
+        [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
+        private extern static void ReleaseCapture();
+        [DllImport("user32.DLL", EntryPoint = "SendMessage")]
+        private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int lParam);
+
+        private void BarraTitulo_MouseDown(object sender, MouseEventArgs e)
+        {
+            ReleaseCapture();
+            SendMessage(this.Handle, 0x112, 0xf012, 0);
+        }
+
+        private void cerrarButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

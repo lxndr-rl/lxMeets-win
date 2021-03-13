@@ -30,34 +30,58 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ScheduleWindow));
             this.horarioPicture = new System.Windows.Forms.PictureBox();
-            this.closeButton = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.cargandoPic = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.horarioPicture)).BeginInit();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cargandoPic)).BeginInit();
             this.SuspendLayout();
             // 
             // horarioPicture
             // 
-            this.horarioPicture.Image = ((System.Drawing.Image)(resources.GetObject("horarioPicture.Image")));
-            this.horarioPicture.InitialImage = ((System.Drawing.Image)(resources.GetObject("horarioPicture.InitialImage")));
-            this.horarioPicture.Location = new System.Drawing.Point(1, 1);
+            this.horarioPicture.Location = new System.Drawing.Point(0, 38);
             this.horarioPicture.Name = "horarioPicture";
             this.horarioPicture.Size = new System.Drawing.Size(891, 546);
             this.horarioPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.horarioPicture.TabIndex = 0;
             this.horarioPicture.TabStop = false;
             // 
-            // closeButton
+            // button1
             // 
-            this.closeButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
-            this.closeButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
-            this.closeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.closeButton.ForeColor = System.Drawing.Color.White;
-            this.closeButton.Location = new System.Drawing.Point(386, 558);
-            this.closeButton.Name = "closeButton";
-            this.closeButton.Size = new System.Drawing.Size(110, 26);
-            this.closeButton.TabIndex = 0;
-            this.closeButton.Text = "Cerrar";
-            this.closeButton.UseVisualStyleBackColor = false;
-            this.closeButton.Click += new System.EventHandler(this.button1_Click);
+            this.button1.BackColor = System.Drawing.Color.Transparent;
+            this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.ForeColor = System.Drawing.Color.Gray;
+            this.button1.Location = new System.Drawing.Point(873, 0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(29, 25);
+            this.button1.TabIndex = 7;
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.Gray;
+            this.panel1.Controls.Add(this.button1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(902, 25);
+            this.panel1.TabIndex = 6;
+            this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BarraTitulo_MouseDown);
+            // 
+            // cargandoPic
+            // 
+            this.cargandoPic.Image = ((System.Drawing.Image)(resources.GetObject("cargandoPic.Image")));
+            this.cargandoPic.InitialImage = ((System.Drawing.Image)(resources.GetObject("cargandoPic.InitialImage")));
+            this.cargandoPic.Location = new System.Drawing.Point(347, 236);
+            this.cargandoPic.Name = "cargandoPic";
+            this.cargandoPic.Size = new System.Drawing.Size(160, 90);
+            this.cargandoPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.cargandoPic.TabIndex = 7;
+            this.cargandoPic.TabStop = false;
             // 
             // ScheduleWindow
             // 
@@ -65,15 +89,18 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
             this.ClientSize = new System.Drawing.Size(902, 596);
-            this.Controls.Add(this.closeButton);
+            this.Controls.Add(this.cargandoPic);
+            this.Controls.Add(this.panel1);
+            this.CenterToScreen();
             this.Controls.Add(this.horarioPicture);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ScheduleWindow";
-            this.CenterToScreen();
             this.Opacity = 0.85D;
             this.Text = "lxMSettings";
             ((System.ComponentModel.ISupportInitialize)(this.horarioPicture)).EndInit();
+            this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.cargandoPic)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -82,7 +109,8 @@
 
         private System.Windows.Forms.PictureBox horarioPicture;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button closeButton;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.PictureBox cargandoPic;
     }
 }
 
