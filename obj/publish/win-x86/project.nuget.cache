@@ -1,15 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "3jihC1PDt75k3koGSh8jgQ4fItwQO9mL954zZDV3O/S+UEekwum9unRY26IbbFYjx8fp5lYzZKr9F4ifCORIcA==",
+  "dgSpecHash": "QBS8oXisBY9TVunRUSLIAdiDDN/uxgyyUnq4UcD3aaYluMzJhKLFYWbS95x4AnVQUGGeoxvm9125gEaLWd681g==",
   "success": true,
   "projectFilePath": "C:\\Users\\w1nd0ws\\Documents\\lxndr\\visual studio\\lxMeets\\lxMeets.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\w1nd0ws\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
     "C:\\Users\\w1nd0ws\\.nuget\\packages\\nhotkey\\2.1.0\\nhotkey.2.1.0.nupkg.sha512",
     "C:\\Users\\w1nd0ws\\.nuget\\packages\\nhotkey.windowsforms\\2.1.0\\nhotkey.windowsforms.2.1.0.nupkg.sha512",
-    "C:\\Users\\w1nd0ws\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x86\\3.1.12\\microsoft.netcore.app.runtime.win-x86.3.1.12.nupkg.sha512",
-    "C:\\Users\\w1nd0ws\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x86\\3.1.12\\microsoft.windowsdesktop.app.runtime.win-x86.3.1.12.nupkg.sha512",
-    "C:\\Users\\w1nd0ws\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x86\\3.1.12\\microsoft.aspnetcore.app.runtime.win-x86.3.1.12.nupkg.sha512"
+    "C:\\Users\\w1nd0ws\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x86\\3.1.13\\microsoft.netcore.app.runtime.win-x86.3.1.13.nupkg.sha512",
+    "C:\\Users\\w1nd0ws\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x86\\3.1.13\\microsoft.windowsdesktop.app.runtime.win-x86.3.1.13.nupkg.sha512",
+    "C:\\Users\\w1nd0ws\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x86\\3.1.13\\microsoft.aspnetcore.app.runtime.win-x86.3.1.13.nupkg.sha512"
   ],
   "logs": []
 }

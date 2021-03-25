@@ -34,6 +34,8 @@ namespace lxMeets
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(lxMeets));
             this.reloadButton = new System.Windows.Forms.Button();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.Cerrar = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -47,6 +49,7 @@ namespace lxMeets
             this.settingsButton = new System.Windows.Forms.Button();
             this.closeButton = new System.Windows.Forms.Button();
             this.cargandoAPI = new System.Windows.Forms.PictureBox();
+            this.contextMenuStrip1.SuspendLayout();
             this.BarraTitulo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cargandoAPI)).BeginInit();
             this.SuspendLayout();
@@ -67,8 +70,23 @@ namespace lxMeets
             // 
             // notifyIcon1
             // 
+            this.notifyIcon1.ContextMenuStrip = this.contextMenuStrip1;
             this.notifyIcon1.Text = "lxMeets";
             this.notifyIcon1.Visible = true;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.Cerrar});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(107, 26);
+            // 
+            // Cerrar
+            // 
+            this.Cerrar.Name = "Cerrar";
+            this.Cerrar.Size = new System.Drawing.Size(106, 22);
+            this.Cerrar.Click += CloseFromIcon;
+            this.Cerrar.Text = "Cerrar";
             // 
             // label1
             // 
@@ -274,7 +292,6 @@ namespace lxMeets
             this.Controls.Add(this.BarraTitulo);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.label2);
-            this.CenterToScreen();
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.reloadButton);
@@ -285,7 +302,9 @@ namespace lxMeets
             this.Name = "lxMeets";
             this.Opacity = 0.7D;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.CenterToScreen();
             this.Text = "lxMeets";
+            this.contextMenuStrip1.ResumeLayout(false);
             this.BarraTitulo.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.cargandoAPI)).EndInit();
             this.ResumeLayout(false);
@@ -310,6 +329,8 @@ namespace lxMeets
         private System.Windows.Forms.Button githubButton;
         private System.Windows.Forms.Button notasButton;
         private System.Windows.Forms.PictureBox cargandoAPI;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem Cerrar;
     }
 }
 

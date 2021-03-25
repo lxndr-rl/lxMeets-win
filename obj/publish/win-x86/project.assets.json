@@ -146,7 +146,8 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\w1nd0ws\\.nuget\\packages\\": {}
+    "C:\\Users\\w1nd0ws\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.1.0",
@@ -157,8 +158,12 @@
       "packagesPath": "C:\\Users\\w1nd0ws\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\w1nd0ws\\Documents\\lxndr\\visual studio\\lxMeets\\obj\\publish\\win-x86\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
         "C:\\Users\\w1nd0ws\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -170,6 +175,7 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "projectReferences": {}
         }
       },
@@ -181,6 +187,7 @@
     },
     "frameworks": {
       "netcoreapp3.1": {
+        "targetAlias": "netcoreapp3.1",
         "dependencies": {
           "NHotkey.WindowsForms": {
             "target": "Package",
@@ -204,15 +211,15 @@
         "downloadDependencies": [
           {
             "name": "Microsoft.AspNetCore.App.Runtime.win-x86",
-            "version": "[3.1.12, 3.1.12]"
+            "version": "[3.1.13, 3.1.13]"
           },
           {
             "name": "Microsoft.NETCore.App.Runtime.win-x86",
-            "version": "[3.1.12, 3.1.12]"
+            "version": "[3.1.13, 3.1.13]"
           },
           {
             "name": "Microsoft.WindowsDesktop.App.Runtime.win-x86",
-            "version": "[3.1.12, 3.1.12]"
+            "version": "[3.1.13, 3.1.13]"
           }
         ],
         "frameworkReferences": {
@@ -223,7 +230,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.406\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
       }
     },
     "runtimes": {

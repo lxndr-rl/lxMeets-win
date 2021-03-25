@@ -221,7 +221,6 @@ C:\Users\w1nd0ws\Documents\lxndr\visual studio\lxMeets\bin\Release\netcoreapp3.1
 C:\Users\w1nd0ws\Documents\lxndr\visual studio\lxMeets\bin\Release\netcoreapp3.1\win-x86\hostfxr.dll
 C:\Users\w1nd0ws\Documents\lxndr\visual studio\lxMeets\bin\Release\netcoreapp3.1\win-x86\hostpolicy.dll
 C:\Users\w1nd0ws\Documents\lxndr\visual studio\lxMeets\bin\Release\netcoreapp3.1\win-x86\mscordaccore.dll
-C:\Users\w1nd0ws\Documents\lxndr\visual studio\lxMeets\bin\Release\netcoreapp3.1\win-x86\mscordaccore_x86_x86_4.700.21.6504.dll
 C:\Users\w1nd0ws\Documents\lxndr\visual studio\lxMeets\bin\Release\netcoreapp3.1\win-x86\mscordbi.dll
 C:\Users\w1nd0ws\Documents\lxndr\visual studio\lxMeets\bin\Release\netcoreapp3.1\win-x86\mscorrc.debug.dll
 C:\Users\w1nd0ws\Documents\lxndr\visual studio\lxMeets\bin\Release\netcoreapp3.1\win-x86\mscorrc.dll
@@ -503,3 +502,4 @@ C:\Users\w1nd0ws\Documents\lxndr\visual studio\lxMeets\obj\Release\netcoreapp3.1
 C:\Users\w1nd0ws\Documents\lxndr\visual studio\lxMeets\obj\Release\netcoreapp3.1\win-x86\lxMeets.SettingsWindow.resources
 C:\Users\w1nd0ws\Documents\lxndr\visual studio\lxMeets\obj\Release\netcoreapp3.1\win-x86\lxMeets.ScheduleWindow.resources
 C:\Users\w1nd0ws\Documents\lxndr\visual studio\lxMeets\obj\Release\netcoreapp3.1\win-x86\lxMeets.GradeWindow.resources
+C:\Users\w1nd0ws\Documents\lxndr\visual studio\lxMeets\bin\Release\netcoreapp3.1\win-x86\mscordaccore_x86_x86_4.700.21.11102.dll

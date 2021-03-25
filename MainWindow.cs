@@ -9,8 +9,8 @@ using System.Runtime.InteropServices;
 using NHotkey.WindowsForms;
 using NHotkey;
 using System.Timers;
-using Microsoft.Win32;
 using System.Text.RegularExpressions;
+using Microsoft.Win32;
 
 namespace lxMeets
 {
@@ -39,7 +39,6 @@ namespace lxMeets
             comboBox1.SelectedItem = getDay(dayName);
             label2.Text = getDay(dayName);
             comboBox1.SelectedIndexChanged += ComboBox1_SelectedIndexChanged;
-            notifyIcon1.Icon = Icon;
             if (Properties.Settings.Default.UseKeyboard)
             {
                 HotkeyManager.Current.AddOrReplace("AbrirClase", Keys.Control | Keys.Alt | Keys.Shift, fromKeyboard);
@@ -48,14 +47,14 @@ namespace lxMeets
             if (Properties.Settings.Default.FirstRun)
             {
                 lxMessageBox.Show("La aplicación corre en segundo plano incluso cuando se presiona X\n\nPuede usar el atajo (Ctrl Alt -) para abrir la clase actual.\n\nLas alertas se muestran 5 minutos antes de una clase y al empezar la clase.\n\nLa aplicación se abre al iniciar windows", "lxMeets " + Properties.Settings.Default.Version, lxMessageBox.Buttons.OK, lxMessageBox.Icon.Warning, lxMessageBox.AnimateStyle.FadeIn).ToString();
-                //string cedula = lxMessageInputBox.ShowDialog("Ingresar número de cédula", "Ingresar número de cédula");
+                string cedula = lxMessageInputBox.ShowDialog("Ingresar número de cédula", "Ingresar número de cédula");
 
-                //while ((cedula.Length < 9 && cedula.Length > 0) || !Regex.IsMatch(cedula, @"^\d+$"))
-                //{
-                //    if (cedula == "Cancel") break;
-                //    MessageBox.Show("Cédula Inválida"); cedula = lxMessageInputBox.ShowDialog("Ingresar número de cédula", "Ingresar número de cédula");
-                //}
-                //authUser(cedula);
+                while ((cedula.Length < 9 && cedula.Length > 0) || !Regex.IsMatch(cedula, @"^\d+$"))
+                {
+                    if (cedula == "Cancel") break;
+                    MessageBox.Show("Cédula Inválida"); cedula = lxMessageInputBox.ShowDialog("Ingresar número de cédula", "Ingresar número de cédula");
+                }
+                if (cedula != "Cancel") authUser(cedula);
                 Properties.Settings.Default.FirstRun = false;
                 Properties.Settings.Default.Save();
             }
@@ -142,25 +141,25 @@ namespace lxMeets
             catch { }
         }
 
-        //public async void authUser(string cedula)
-        //{
-        //    try
-        //    {
-        //        string url = @"https://api.lxndr.dev/uae/estudiantes/?cedula=" + cedula;
-        //        var json = await client.DownloadStringTaskAsync(url);
-        //        dynamic stuff = JsonConvert.DeserializeObject(json);
-        //        if ((bool)stuff.error)
-        //        {
-        //            MessageBox.Show(stuff.message.ToString());
-        //        }
-        //        else
-        //        {
-        //            Properties.Settings.Default.Cedula = cedula;
-        //            Properties.Settings.Default.Save();
-        //        }
-        //    }
-        //    catch { }
-        //}
+        public async void authUser(string cedula)
+        {
+            try
+            {
+                string url = @"https://api.lxndr.dev/uae/estudiantes/?cedula=" + cedula;
+                var json = await client.DownloadStringTaskAsync(url);
+                dynamic stuff = JsonConvert.DeserializeObject(json);
+                if ((bool)stuff.error)
+                {
+                    MessageBox.Show(stuff.message.ToString());
+                }
+                else
+                {
+                    Properties.Settings.Default.Cedula = cedula;
+                    Properties.Settings.Default.Save();
+                }
+            }
+            catch { }
+        }
 
         public async void fromKeyboard(object sender, HotkeyEventArgs e)
         {
@@ -172,6 +171,7 @@ namespace lxMeets
                 dynamic stuff = JsonConvert.DeserializeObject(json);
                 if (stuff.materia.ToString() == "No hay nada por ahora")
                 {
+                    notifyIcon1.Icon = Icon;
                     notifyIcon1.BalloonTipTitle = "lxMeets";
                     notifyIcon1.BalloonTipText = stuff.materia.ToString();
                     notifyIcon1.ShowBalloonTip(1000);
@@ -228,6 +228,16 @@ namespace lxMeets
         private void OpenFromIcon(object sender, EventArgs e)
         {
             this.Show();
+        }
+
+        private void CloseFromIcon(object sender, EventArgs e)
+        {
+            notifyIcon1.Icon = null;
+            notifyIcon1.Visible = false;
+            notifyIcon1.Dispose();
+            Application.Exit();
+            Environment.Exit(0);
+
         }
 
         private async void fetchAPI()
@@ -337,6 +347,7 @@ namespace lxMeets
                 var json = await client.DownloadStringTaskAsync(url);
                 dynamic stuff = JsonConvert.DeserializeObject(json);
                 if (stuff.materia.ToString() == "No hay nada por ahora" || !Properties.Settings.Default.Notifications) return;
+                notifyIcon1.Icon = Icon;
                 notifyIcon1.BalloonTipTitle = "lxMeets";
                 notifyIcon1.BalloonTipText = "Dentro de 5 minutos: " + stuff.materia.ToString();
                 notifyIcon1.ShowBalloonTip(1000);
@@ -352,6 +363,7 @@ namespace lxMeets
                 var json = await client.DownloadStringTaskAsync(url);
                 dynamic stuff = JsonConvert.DeserializeObject(json);
                 if (stuff.materia.ToString() == "No hay nada por ahora" || !Properties.Settings.Default.Notifications) return;
+                notifyIcon1.Icon = Icon;
                 notifyIcon1.BalloonTipTitle = stuff.materia.ToString();
                 notifyIcon1.BalloonTipText = stuff.hora.ToString();
                 notifyIcon1.ShowBalloonTip(1000);
@@ -397,7 +409,8 @@ namespace lxMeets
         {
             //this.Close();
             this.Hide();
-            notifyIcon1.Click += OpenFromIcon;
+            notifyIcon1.Icon = Icon;
+            notifyIcon1.DoubleClick += OpenFromIcon;
         }
         private void settings_Click(object sender, EventArgs e)
         {
