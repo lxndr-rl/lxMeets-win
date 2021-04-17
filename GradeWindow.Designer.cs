@@ -192,9 +192,9 @@
             this.Controls.Add(this.facultadLabel);
             this.Controls.Add(this.nombresLabel);
             this.Controls.Add(this.label2);
-            this.CenterToScreen();
             this.Controls.Add(this.label1);
             this.Controls.Add(this.tablaPromedio);
+            this.CenterToParent();
             this.Controls.Add(this.tablaParcial);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

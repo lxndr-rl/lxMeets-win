@@ -29,23 +29,14 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ScheduleWindow));
-            this.horarioPicture = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.horarioPicture = new System.Windows.Forms.PictureBox();
             this.cargandoPic = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.horarioPicture)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.horarioPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cargandoPic)).BeginInit();
             this.SuspendLayout();
-            // 
-            // horarioPicture
-            // 
-            this.horarioPicture.Location = new System.Drawing.Point(0, 38);
-            this.horarioPicture.Name = "horarioPicture";
-            this.horarioPicture.Size = new System.Drawing.Size(891, 546);
-            this.horarioPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.horarioPicture.TabIndex = 0;
-            this.horarioPicture.TabStop = false;
             // 
             // button1
             // 
@@ -72,13 +63,22 @@
             this.panel1.TabIndex = 6;
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BarraTitulo_MouseDown);
             // 
+            // horarioPicture
+            // 
+            this.horarioPicture.Location = new System.Drawing.Point(0, 38);
+            this.horarioPicture.Name = "horarioPicture";
+            this.horarioPicture.Size = new System.Drawing.Size(891, 546);
+            this.horarioPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.horarioPicture.TabIndex = 0;
+            this.horarioPicture.TabStop = false;
+            // 
             // cargandoPic
             // 
-            this.cargandoPic.Image = ((System.Drawing.Image)(resources.GetObject("cargandoPic.Image")));
-            this.cargandoPic.InitialImage = ((System.Drawing.Image)(resources.GetObject("cargandoPic.InitialImage")));
-            this.cargandoPic.Location = new System.Drawing.Point(347, 236);
+            this.cargandoPic.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("cargandoPic.BackgroundImage")));
+            this.cargandoPic.Image = global::lxMeets.Properties.Resources.loading_icon_transparent_background_12;
+            this.cargandoPic.Location = new System.Drawing.Point(384, 227);
             this.cargandoPic.Name = "cargandoPic";
-            this.cargandoPic.Size = new System.Drawing.Size(160, 90);
+            this.cargandoPic.Size = new System.Drawing.Size(136, 112);
             this.cargandoPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.cargandoPic.TabIndex = 7;
             this.cargandoPic.TabStop = false;
@@ -91,25 +91,24 @@
             this.ClientSize = new System.Drawing.Size(902, 596);
             this.Controls.Add(this.cargandoPic);
             this.Controls.Add(this.panel1);
-            this.CenterToScreen();
             this.Controls.Add(this.horarioPicture);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ScheduleWindow";
             this.Opacity = 0.85D;
+            this.CenterToParent();
             this.Text = "lxMSettings";
-            ((System.ComponentModel.ISupportInitialize)(this.horarioPicture)).EndInit();
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.horarioPicture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cargandoPic)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.PictureBox horarioPicture;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.PictureBox horarioPicture;
         private System.Windows.Forms.PictureBox cargandoPic;
     }
 }

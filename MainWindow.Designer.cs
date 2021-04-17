@@ -292,6 +292,7 @@ namespace lxMeets
             this.Controls.Add(this.BarraTitulo);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.label2);
+            this.CenterToScreen();
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.reloadButton);
@@ -302,7 +303,6 @@ namespace lxMeets
             this.Name = "lxMeets";
             this.Opacity = 0.7D;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.CenterToScreen();
             this.Text = "lxMeets";
             this.contextMenuStrip1.ResumeLayout(false);
             this.BarraTitulo.ResumeLayout(false);

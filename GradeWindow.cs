@@ -12,28 +12,30 @@ namespace lxMeets
     {
         WebClient client = new WebClient();
         string cedula = "";
+        string anioLectivo = "";
         public GradeWindow()
         {
             InitializeComponent();
-
             if (Properties.Settings.Default.Cedula.Length > 2) { cedula = Properties.Settings.Default.Cedula; }
 
             else
             {
-                cedula = lxMessageInputBox.ShowDialog("Ingresar número de cédula", "Ingresar número de cédula");
-
+                cedula = lxMessageInputBox.ShowDialog("Ingresar número de cédula", "Ingresar número de cédula", true);
+                anioLectivo = cedula.Split('[', ']')[1];
+                cedula = cedula.Split('(', ')')[1];
                 while ((cedula.Length < 9 && cedula.Length > 0) || !Regex.IsMatch(cedula, @"^\d+$"))
                 {
+
                     if (cedula == "Cancel") break;
                     MessageBox.Show("Cédula Inválida"); cedula = lxMessageInputBox.ShowDialog("Ingresar número de cédula", "Ingresar número de cédula");
                 }
             }
-            if (cedula != "Cancel") fetchAPI(cedula);
+            if (cedula != "Cancel") fetchAPI(cedula, anioLectivo);
 
 
         }
 
-        private async void fetchAPI(string cedula)
+        private async void fetchAPI(string cedula, string anioLect)
         {
             /*
              TODO
@@ -42,11 +44,13 @@ namespace lxMeets
              */
             try
             {
+                carreraLabel.Visible = false;
+                nombresLabel.Visible = false;
                 label1.Visible = false;
                 label2.Visible = false;
                 tablaParcial.Visible = false;
                 tablaPromedio.Visible = false;
-                string url = @"https://api.lxndr.dev/uae/notas/?ced=" + cedula;
+                string url = @"https://api.lxndr.dev/uae/notas/?ced=" + cedula + "&alectivo=" + anioLect;
                 if (cedula.Length == 0) this.Close();
                 var json = await client.DownloadStringTaskAsync(url);
                 dynamic stuff = JsonConvert.DeserializeObject(json);
@@ -60,6 +64,8 @@ namespace lxMeets
                 label1.Visible = true;
                 label2.Visible = true;
                 tablaParcial.Visible = true;
+                carreraLabel.Visible = true;
+                nombresLabel.Visible = true;
                 tablaPromedio.Visible = true;
                 cargandoPicture.Visible = false;
             }
@@ -105,8 +111,9 @@ namespace lxMeets
 
         private void otraCButton_Click(object sender, EventArgs e)
         {
-            cedula = lxMessageInputBox.ShowDialog("Ingresar número de cédula", "Ingresar número de cédula");
-
+            cedula = lxMessageInputBox.ShowDialog("Ingresar número de cédula", "Ingresar número de cédula", true);
+            anioLectivo = cedula.Split('[', ']')[1];
+            cedula = cedula.Split('(', ')')[1];
             while ((cedula.Length < 9 && cedula.Length > 0) || !Regex.IsMatch(cedula, @"^\d+$"))
             {
                 if (cedula == "Cancel") break;
@@ -117,7 +124,7 @@ namespace lxMeets
             otraCButton.Visible = false;
             if (cedula == "Cancel") this.Close();
 
-            fetchAPI(cedula);
+            fetchAPI(cedula, anioLectivo);
         }
 
         private void GradeWindow_Shown(object sender, EventArgs e)

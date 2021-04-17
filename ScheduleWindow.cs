@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
@@ -19,10 +20,14 @@ namespace lxMeets
             }
             else tipo = "nicki-loop.gif";
             horarioPicture.LoadAsync("https://lxndr.dev/uae/res/" + tipo);
-            cargandoPic.Visible = false;
+            horarioPicture.LoadCompleted += horarioCargado;
+
 
         }
-
+        private void horarioCargado(Object sender, AsyncCompletedEventArgs e)
+        {
+            cargandoPic.Visible = false;
+        }
         private void button1_Click(object sender, EventArgs e)
         {
             this.Close();

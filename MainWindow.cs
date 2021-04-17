@@ -495,8 +495,6 @@ namespace lxMeets
 
         private void notasButton_Click(object sender, EventArgs e)
         {
-
-
             bool exist = false;
             foreach (Form frm in fc)
             {

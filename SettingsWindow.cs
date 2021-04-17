@@ -10,7 +10,6 @@ namespace lxMeets
 {
     public partial class SettingsWindow : Form
     {
-        private bool recording = false;
         public SettingsWindow()
         {
             InitializeComponent();
@@ -20,54 +19,11 @@ namespace lxMeets
             sendNotificationsCheck.Checked = Properties.Settings.Default.Notifications;
 
             this.KeyPreview = true;
-
-            if (Properties.Settings.Default.UseKeyboard)
-            {
-                recordKeyboardButton.Enabled = true;
-            }
-            else
-            {
-                recordKeyboardButton.Enabled = false;
-            }
         }
 
         private void saveButton_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        void Form1_KeyPress(object sender, KeyEventArgs e)
-        {
-            if (recording)
-            {
-                string keyboardKey = e.KeyCode.ToString().Replace("Key", "");
-                keyboardKey = keyboardKey.Replace("Menu", "Alt");
-                keyboardShortCutText.Text += keyboardKey + " | ";
-                //list.Add(e.KeyData.ToString());
-            }
-        }
-
-        private void record_Click(object sender, EventArgs e)
-        {
-            keyboardShortCutText.Text = "";
-            recordKeyboardButton.Visible = false;
-            stopRecordButton.Visible = true;
-            recording = true;
-        }
-
-        private void stoprecord_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                keyboardShortCutText.Text = keyboardShortCutText.Text.Remove(keyboardShortCutText.Text.Length - 3);
-            }
-            catch
-            {
-                keyboardShortCutText.Text = Properties.Settings.Default.KeyBoardShortCut;
-            }
-            recordKeyboardButton.Visible = true;
-            stopRecordButton.Visible = false;
-            recording = false;
         }
 
         private void useKeyboardCheck_CheckedChanged(object sender, EventArgs e)
@@ -76,14 +32,12 @@ namespace lxMeets
             {
                 var mainForm = Application.OpenForms.OfType<lxMeets>().Single();
                 HotkeyManager.Current.AddOrReplace("AbrirClase", Keys.Control | Keys.Alt | Keys.Shift, mainForm.fromKeyboard);
-                recordKeyboardButton.Enabled = true;
                 Properties.Settings.Default.UseKeyboard = true;
                 Properties.Settings.Default.Save();
             }
             else
             {
                 HotkeyManager.Current.Remove("AbrirClase");
-                recordKeyboardButton.Enabled = false;
                 Properties.Settings.Default.UseKeyboard = false;
                 Properties.Settings.Default.Save();
             }

@@ -32,9 +32,7 @@
             this.autoRunCheck = new System.Windows.Forms.CheckBox();
             this.saveButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.stopRecordButton = new System.Windows.Forms.Button();
             this.keyboardShortCutText = new System.Windows.Forms.TextBox();
-            this.recordKeyboardButton = new System.Windows.Forms.Button();
             this.useKeyboardCheck = new System.Windows.Forms.CheckBox();
             this.sendNotificationsCheck = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
@@ -68,9 +66,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.stopRecordButton);
             this.groupBox1.Controls.Add(this.keyboardShortCutText);
-            this.groupBox1.Controls.Add(this.recordKeyboardButton);
             this.groupBox1.ForeColor = System.Drawing.Color.White;
             this.groupBox1.Location = new System.Drawing.Point(260, 72);
             this.groupBox1.Name = "groupBox1";
@@ -78,21 +74,6 @@
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Atajo";
-            // 
-            // stopRecordButton
-            // 
-            this.stopRecordButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
-            this.stopRecordButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
-            this.stopRecordButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.stopRecordButton.ForeColor = System.Drawing.Color.White;
-            this.stopRecordButton.Location = new System.Drawing.Point(18, 81);
-            this.stopRecordButton.Name = "stopRecordButton";
-            this.stopRecordButton.Size = new System.Drawing.Size(58, 25);
-            this.stopRecordButton.TabIndex = 2;
-            this.stopRecordButton.Text = "Detener";
-            this.stopRecordButton.UseVisualStyleBackColor = false;
-            this.stopRecordButton.Visible = false;
-            this.stopRecordButton.Click += new System.EventHandler(this.stoprecord_Click);
             // 
             // keyboardShortCutText
             // 
@@ -103,21 +84,6 @@
             this.keyboardShortCutText.Name = "keyboardShortCutText";
             this.keyboardShortCutText.Size = new System.Drawing.Size(132, 23);
             this.keyboardShortCutText.TabIndex = 3;
-            // 
-            // recordKeyboardButton
-            // 
-            this.recordKeyboardButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
-            this.recordKeyboardButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
-            this.recordKeyboardButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.recordKeyboardButton.ForeColor = System.Drawing.Color.White;
-            this.recordKeyboardButton.Location = new System.Drawing.Point(117, 81);
-            this.recordKeyboardButton.Name = "recordKeyboardButton";
-            this.recordKeyboardButton.Size = new System.Drawing.Size(55, 25);
-            this.recordKeyboardButton.TabIndex = 2;
-            this.recordKeyboardButton.Text = "Grabar";
-            this.recordKeyboardButton.UseVisualStyleBackColor = false;
-            this.recordKeyboardButton.Visible = false;
-            this.recordKeyboardButton.Click += new System.EventHandler(this.record_Click);
             // 
             // useKeyboardCheck
             // 
@@ -159,9 +125,8 @@
             this.Name = "SettingsWindow";
             this.Opacity = 0.85D;
             this.Text = "lxMSettings";
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyPress);
             this.groupBox1.ResumeLayout(false);
-            this.CenterToScreen();
+            this.CenterToParent();
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -174,10 +139,8 @@
         private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox keyboardShortCutText;
-        private System.Windows.Forms.Button recordKeyboardButton;
         private System.Windows.Forms.CheckBox useKeyboardCheck;
         private System.Windows.Forms.CheckBox sendNotificationsCheck;
-        private System.Windows.Forms.Button stopRecordButton;
     }
 }
 
