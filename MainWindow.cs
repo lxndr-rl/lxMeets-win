@@ -43,7 +43,6 @@ namespace lxMeets
             {
                 HotkeyManager.Current.AddOrReplace("AbrirClase", Keys.Control | Keys.Alt | Keys.Shift, fromKeyboard);
             }
-            RegisterInStartup(Properties.Settings.Default.FirstRun);
             if (Properties.Settings.Default.FirstRun)
             {
                 lxMessageBox.Show("La aplicación corre en segundo plano incluso cuando se presiona X\n\nPuede usar el atajo (Ctrl Alt -) para abrir la clase actual.\n\nLas alertas se muestran 5 minutos antes de una clase y al empezar la clase.\n\nLa aplicación se abre al iniciar windows", "lxMeets " + Properties.Settings.Default.Version, lxMessageBox.Buttons.OK, lxMessageBox.Icon.Warning, lxMessageBox.AnimateStyle.FadeIn).ToString();
@@ -63,7 +62,7 @@ namespace lxMeets
             int lastHour2 = DateTime.Now.Hour;
             aTimer.Elapsed += new ElapsedEventHandler(TriggerNotif);
             aTimer.Start();
-
+            RegisterInStartup(Properties.Settings.Default.FirstRun);
         }
 
         private void RegisterInStartup(bool isChecked)

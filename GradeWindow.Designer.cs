@@ -132,9 +132,9 @@
             // 
             this.cargandoPicture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.cargandoPicture.Image = ((System.Drawing.Image)(resources.GetObject("cargandoPicture.Image")));
-            this.cargandoPicture.Location = new System.Drawing.Point(230, 50);
+            this.cargandoPicture.Location = new System.Drawing.Point(227, 40);
             this.cargandoPicture.Name = "cargandoPicture";
-            this.cargandoPicture.Size = new System.Drawing.Size(424, 105);
+            this.cargandoPicture.Size = new System.Drawing.Size(423, 105);
             this.cargandoPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.cargandoPicture.TabIndex = 3;
             this.cargandoPicture.TabStop = false;
@@ -194,7 +194,6 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.tablaPromedio);
-            this.CenterToParent();
             this.Controls.Add(this.tablaParcial);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

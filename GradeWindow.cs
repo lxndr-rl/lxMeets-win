@@ -37,16 +37,12 @@ namespace lxMeets
 
         private async void fetchAPI(string cedula, string anioLect)
         {
-            /*
-             TODO
-            Implementar selección de Año Lectivo
-            API ya lista para consultar con año lectivo 
-             */
             try
             {
                 carreraLabel.Visible = false;
                 nombresLabel.Visible = false;
                 label1.Visible = false;
+                facultadLabel.Visible = false;
                 label2.Visible = false;
                 tablaParcial.Visible = false;
                 tablaPromedio.Visible = false;
@@ -66,6 +62,7 @@ namespace lxMeets
                 tablaParcial.Visible = true;
                 carreraLabel.Visible = true;
                 nombresLabel.Visible = true;
+                facultadLabel.Visible = true;
                 tablaPromedio.Visible = true;
                 cargandoPicture.Visible = false;
             }
@@ -119,10 +116,9 @@ namespace lxMeets
                 if (cedula == "Cancel") break;
                 MessageBox.Show("Cédula Inválida"); cedula = lxMessageInputBox.ShowDialog("Ingresar número de cédula", "Ingresar número de cédula");
             }
-
+            if (cedula == "Cancel") return;
             cargandoPicture.Visible = true;
             otraCButton.Visible = false;
-            if (cedula == "Cancel") this.Close();
 
             fetchAPI(cedula, anioLectivo);
         }
