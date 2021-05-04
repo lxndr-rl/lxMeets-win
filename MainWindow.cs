@@ -1,16 +1,16 @@
-﻿using System;
-using System.Drawing;
-using System.Diagnostics;
-using System.Net;
-using Newtonsoft.Json;
-using lxMsgBox;
-using System.Windows.Forms;
-using System.Runtime.InteropServices;
-using NHotkey.WindowsForms;
-using NHotkey;
-using System.Timers;
-using System.Text.RegularExpressions;
+﻿using lxMsgBox;
 using Microsoft.Win32;
+using Newtonsoft.Json;
+using NHotkey;
+using NHotkey.WindowsForms;
+using System;
+using System.Diagnostics;
+using System.Drawing;
+using System.Net;
+using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
+using System.Timers;
+using System.Windows.Forms;
 
 namespace lxMeets
 {
@@ -62,17 +62,13 @@ namespace lxMeets
             int lastHour2 = DateTime.Now.Hour;
             aTimer.Elapsed += new ElapsedEventHandler(TriggerNotif);
             aTimer.Start();
-            RegisterInStartup(Properties.Settings.Default.FirstRun);
         }
 
-        private void RegisterInStartup(bool isChecked)
+        private void RegisterInStartup()
         {
             RegistryKey registryKey = Registry.CurrentUser.OpenSubKey
                     ("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
-            if (isChecked)
-            {
-                registryKey.SetValue("lxMeets", Process.GetCurrentProcess().MainModule.FileName.ToString());
-            }
+            registryKey.SetValue("lxMeets", Process.GetCurrentProcess().MainModule.FileName.ToString());
         }
 
         private void TriggerNotif(object source, ElapsedEventArgs e)
@@ -260,6 +256,7 @@ namespace lxMeets
                 }
             }
             catch { }
+            if (Properties.Settings.Default.FirstRun) RegisterInStartup();
             cargandoAPI.Visible = false;
         }
 
@@ -505,5 +502,6 @@ namespace lxMeets
             if (!exist) { GradeWindow notas = new GradeWindow(); notas.Show(); }
 
         }
+
     }
 }

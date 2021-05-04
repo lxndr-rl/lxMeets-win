@@ -191,6 +191,7 @@
             this.Controls.Add(this.carreraLabel);
             this.Controls.Add(this.facultadLabel);
             this.Controls.Add(this.nombresLabel);
+            this.CenterToScreen();
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.tablaPromedio);
@@ -199,7 +200,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "GradeWindow";
             this.Opacity = 0.85D;
-            this.Text = "lxMGrade";
+            this.Text = "lxGrade";
             this.Shown += new System.EventHandler(this.GradeWindow_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.cargandoPicture)).EndInit();
             this.panel1.ResumeLayout(false);

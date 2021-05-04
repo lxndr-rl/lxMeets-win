@@ -1,10 +1,9 @@
-﻿using System;
-using System.Windows.Forms;
-using Microsoft.Win32;
-using System.Diagnostics;
+﻿using Microsoft.Win32;
 using NHotkey.WindowsForms;
-using System.Collections.Generic;
+using System;
+using System.Diagnostics;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace lxMeets
 {
