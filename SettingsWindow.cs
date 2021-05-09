@@ -48,7 +48,7 @@ namespace lxMeets
                     ("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
             if (autoRunCheck.Checked)
             {
-                registryKey.SetValue("lxMeets", Process.GetCurrentProcess().MainModule.FileName.ToString());
+                registryKey.SetValue("lxMeets", $"{Process.GetCurrentProcess().MainModule.FileName} --start-minimized");
                 Properties.Settings.Default.AutoStart = true;
                 Properties.Settings.Default.Save();
             }

@@ -1008,3 +1008,4 @@ I:\lxndr\Documentos\visualStudio\lxMeets-win\obj\Release\netcoreapp3.1\win-x86\l
 I:\lxndr\Documentos\visualStudio\lxMeets-win\obj\Release\netcoreapp3.1\win-x86\lxMeets.dll
 I:\lxndr\Documentos\visualStudio\lxMeets-win\obj\Release\netcoreapp3.1\win-x86\lxMeets.pdb
 I:\lxndr\Documentos\visualStudio\lxMeets-win\obj\Release\netcoreapp3.1\win-x86\lxMeets.genruntimeconfig.cache
+I:\lxndr\Documentos\visualStudio\lxMeets-win\obj\Release\netcoreapp3.1\win-x86\lxMeets.csprojAssemblyReference.cache

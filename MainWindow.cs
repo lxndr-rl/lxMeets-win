@@ -68,7 +68,7 @@ namespace lxMeets
         {
             RegistryKey registryKey = Registry.CurrentUser.OpenSubKey
                     ("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
-            registryKey.SetValue("lxMeets", Process.GetCurrentProcess().MainModule.FileName.ToString());
+            registryKey.SetValue("lxMeets", $"{Process.GetCurrentProcess().MainModule.FileName} --start-minimized");
         }
 
         private void TriggerNotif(object source, ElapsedEventArgs e)

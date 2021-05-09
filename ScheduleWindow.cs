@@ -18,8 +18,8 @@ namespace lxMeets
             {
                 tipo = "horarioex.png";
             }
-            else tipo = "nicki-loop.gif";
-            horarioPicture.LoadAsync("https://lxndr.dev/uae/res/" + tipo);
+            else tipo = "loop.gif";
+            horarioPicture.LoadAsync("https://lxmeets.lxndr.dev/res/" + tipo);
             horarioPicture.LoadCompleted += horarioCargado;
 
 
