@@ -46,7 +46,7 @@ namespace lxMeets
             }
             if (Properties.Settings.Default.FirstRun)
             {
-                lxMessageBox.Show("La aplicación corre en segundo plano incluso cuando se presiona X\n\nPuede usar el atajo (Ctrl Alt -) para abrir la clase actual.\n\nLas alertas se muestran 5 minutos antes de una clase y al empezar la clase.\n\nLa aplicación se abre al iniciar windows", "lxMeets " + Properties.Settings.Default.Version, lxMessageBox.Buttons.OK, lxMessageBox.Icon.Warning, lxMessageBox.AnimateStyle.FadeIn).ToString();
+                lxMessageBox.Show("La aplicación corre en segundo plano incluso cuando se presiona X\n\nPuede usar el atajo (Ctrl Alt Shift) para abrir la clase actual.\n\nLas alertas se muestran 5 minutos antes de una clase y al empezar la clase.\n\nLa aplicación se abre al iniciar windows", "lxMeets " + Properties.Settings.Default.Version, lxMessageBox.Buttons.OK, lxMessageBox.Icon.Warning, lxMessageBox.AnimateStyle.FadeIn).ToString();
                 string cedula = lxMessageInputBox.ShowDialog("Ingresar número de cédula", "Ingresar número de cédula");
 
                 while ((cedula.Length < 9 && cedula.Length > 0) || !Regex.IsMatch(cedula, @"^\d+$"))
