@@ -96,7 +96,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ScheduleWindow";
             this.Opacity = 0.85D;
-            this.CenterToParent();
+            this.CenterToScreen();
             this.Text = "lxMSettings";
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.horarioPicture)).EndInit();

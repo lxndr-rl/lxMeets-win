@@ -39,6 +39,7 @@ namespace lxMeets
             comboBox1.SelectedItem = getDay(dayName);
             label2.Text = getDay(dayName);
             comboBox1.SelectedIndexChanged += ComboBox1_SelectedIndexChanged;
+            notifyIcon1.Icon = Icon;
             if (Properties.Settings.Default.UseKeyboard)
             {
                 HotkeyManager.Current.AddOrReplace("AbrirClase", Keys.Control | Keys.Alt | Keys.Shift, fromKeyboard);
@@ -127,7 +128,7 @@ namespace lxMeets
                     string seleccion = lxMessageBox.Show(stuff.cambios.ToString(), stuff.type.ToString(), lxMessageBox.Buttons.OKCancel, lxMessageBox.Icon.Warning, lxMessageBox.AnimateStyle.FadeIn).ToString();
                     if (seleccion == "OK")
                     {
-                        OpenUrl1("https://lxmeets.lxndr.dev/lxmeets.exe");
+                        OpenUrl1("https://lxmeets.lxndr.dev/");
                         Properties.Settings.Default.Version = stuff.latest;
                         Properties.Settings.Default.Save();
                     }
@@ -166,13 +167,12 @@ namespace lxMeets
                 dynamic stuff = JsonConvert.DeserializeObject(json);
                 if (stuff.materia.ToString() == "No hay nada por ahora")
                 {
-                    notifyIcon1.Icon = Icon;
                     notifyIcon1.BalloonTipTitle = "lxMeets";
                     notifyIcon1.BalloonTipText = stuff.materia.ToString();
                     notifyIcon1.ShowBalloonTip(1000);
                     return;
                 }
-                OpenUrl1("https://www.apps.lxndr.dev/lxmeets/redirecter.php");
+                OpenUrl1("https://apps.lxndr.dev/lxmeets/redirecter.php");
             }
             catch { }
         }
@@ -343,7 +343,6 @@ namespace lxMeets
                 var json = await client.DownloadStringTaskAsync(url);
                 dynamic stuff = JsonConvert.DeserializeObject(json);
                 if (stuff.materia.ToString() == "No hay nada por ahora" || !Properties.Settings.Default.Notifications) return;
-                notifyIcon1.Icon = Icon;
                 notifyIcon1.BalloonTipTitle = "lxMeets";
                 notifyIcon1.BalloonTipText = "Dentro de 5 minutos: " + stuff.materia.ToString();
                 notifyIcon1.ShowBalloonTip(1000);
@@ -359,7 +358,6 @@ namespace lxMeets
                 var json = await client.DownloadStringTaskAsync(url);
                 dynamic stuff = JsonConvert.DeserializeObject(json);
                 if (stuff.materia.ToString() == "No hay nada por ahora" || !Properties.Settings.Default.Notifications) return;
-                notifyIcon1.Icon = Icon;
                 notifyIcon1.BalloonTipTitle = stuff.materia.ToString();
                 notifyIcon1.BalloonTipText = stuff.hora.ToString();
                 notifyIcon1.ShowBalloonTip(1000);
@@ -405,7 +403,6 @@ namespace lxMeets
         {
             //this.Close();
             this.Hide();
-            notifyIcon1.Icon = Icon;
             notifyIcon1.DoubleClick += OpenFromIcon;
         }
         private void settings_Click(object sender, EventArgs e)
@@ -502,6 +499,5 @@ namespace lxMeets
             if (!exist) { GradeWindow notas = new GradeWindow(); notas.Show(); }
 
         }
-
     }
 }
