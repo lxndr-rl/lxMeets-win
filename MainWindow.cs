@@ -6,6 +6,7 @@ using NHotkey.WindowsForms;
 using System;
 using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.Net;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
@@ -46,7 +47,7 @@ namespace lxMeets
             }
             if (Properties.Settings.Default.FirstRun)
             {
-                lxMessageBox.Show("La aplicación corre en segundo plano incluso cuando se presiona X\n\nPuede usar el atajo (Ctrl Alt Shift) para abrir la clase actual.\n\nLas alertas se muestran 5 minutos antes de una clase y al empezar la clase.\n\nLa aplicación se abre al iniciar windows", "lxMeets " + Properties.Settings.Default.Version, lxMessageBox.Buttons.OK, lxMessageBox.Icon.Warning, lxMessageBox.AnimateStyle.FadeIn).ToString();
+                lxMessageBox.Show("La aplicación corre en segundo plano incluso cuando se presiona X\n\nPuede usar el atajo (Ctrl Alt Shift) para abrir la clase actual.\n\nLas alertas se muestran 5 minutos antes de una clase y al empezar la clase.\n\nLa aplicación se abre al iniciar windows", "lxMeets " + Properties.Settings.Default.Version.ToString(CultureInfo.GetCultureInfo("en-GB")), lxMessageBox.Buttons.OK, lxMessageBox.Icon.Warning, lxMessageBox.AnimateStyle.FadeIn).ToString();
                 string cedula = lxMessageInputBox.ShowDialog("Ingresar número de cédula", "Ingresar número de cédula");
 
                 while ((cedula.Length < 9 && cedula.Length > 0) || !Regex.IsMatch(cedula, @"^\d+$"))
@@ -114,7 +115,7 @@ namespace lxMeets
             }
         }
 
-        public async void fetchLatestVer()
+        private async void fetchLatestVer()
         {
             try
             {
@@ -125,19 +126,23 @@ namespace lxMeets
                 if ((bool)stuff.notas) notasButton.Visible = true;
                 if (stuff.latest > Properties.Settings.Default.Version)
                 {
-                    string seleccion = lxMessageBox.Show(stuff.cambios.ToString(), stuff.type.ToString(), lxMessageBox.Buttons.OKCancel, lxMessageBox.Icon.Warning, lxMessageBox.AnimateStyle.FadeIn).ToString();
-                    if (seleccion == "OK")
+                    foreach (var item in stuff.target)
                     {
-                        OpenUrl1("https://lxmeets.lxndr.dev/");
-                        Properties.Settings.Default.Version = stuff.latest;
-                        Properties.Settings.Default.Save();
+                        if (item.ToString() == "windows" || item.ToString() == "all")
+                        {
+                            string seleccion = lxMessageBox.Show(stuff.cambios.ToString(), stuff.type.ToString(), lxMessageBox.Buttons.OKCancel, lxMessageBox.Icon.Warning, lxMessageBox.AnimateStyle.FadeIn).ToString();
+                            if (seleccion == "OK")
+                            {
+                                OpenUrl1("https://lxmeets.lxndr.dev/");
+                            }
+                        }
                     }
                 }
             }
-            catch { }
+            catch (Exception e) { MessageBox.Show(e.ToString()); }
         }
 
-        public async void authUser(string cedula)
+        private async void authUser(string cedula)
         {
             try
             {
@@ -147,6 +152,19 @@ namespace lxMeets
                 if ((bool)stuff.error)
                 {
                     MessageBox.Show(stuff.message.ToString());
+                    while (true)
+                    {
+                        lxMessageBox.Show("La aplicación corre en segundo plano incluso cuando se presiona X\n\nPuede usar el atajo (Ctrl Alt Shift) para abrir la clase actual.\n\nLas alertas se muestran 5 minutos antes de una clase y al empezar la clase.\n\nLa aplicación se abre al iniciar windows", "lxMeets " + Properties.Settings.Default.Version, lxMessageBox.Buttons.OK, lxMessageBox.Icon.Warning, lxMessageBox.AnimateStyle.FadeIn).ToString();
+                        cedula = lxMessageInputBox.ShowDialog("Ingresar número de cédula", "Ingresar número de cédula");
+
+                        while ((cedula.Length < 9 && cedula.Length > 0) || !Regex.IsMatch(cedula, @"^\d+$"))
+                        {
+                            if (cedula == "Cancel") break;
+                            MessageBox.Show("Cédula Inválida"); cedula = lxMessageInputBox.ShowDialog("Ingresar número de cédula", "Ingresar número de cédula");
+                        }
+                        if (cedula != "Cancel") authUser(cedula);
+                        break;
+                    }
                 }
                 else
                 {
@@ -183,7 +201,7 @@ namespace lxMeets
             label2.Text = comboBox1.GetItemText(comboBox1.SelectedItem);
         }
 
-        public string getDay(string dayName)
+        private string getDay(string dayName)
         {
             if (dayName == "Monday" || dayName == "Lunes")
             {

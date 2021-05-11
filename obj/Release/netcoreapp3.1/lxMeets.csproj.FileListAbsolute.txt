@@ -22,27 +22,3 @@ C:\Users\w1nd0ws\Documents\lxndr\visual studio\lxMeets\obj\Release\netcoreapp3.1
 C:\Users\w1nd0ws\Documents\lxndr\visual studio\lxMeets\obj\Release\netcoreapp3.1\lxMeets.csprojAssemblyReference.cache
 C:\Users\w1nd0ws\Documents\lxndr\visual studio\lxMeets\obj\Release\netcoreapp3.1\lxMeets.GradeWindow.resources
 C:\Users\w1nd0ws\Documents\lxndr\visual studio\lxMeets\obj\Release\netcoreapp3.1\lxMeets.csproj.CoreCompileInputs.cache
-I:\lxndr\Documentos\visualStudio\lxMeets-win\obj\Release\netcoreapp3.1\lxMeets.csprojAssemblyReference.cache
-I:\lxndr\Documentos\visualStudio\lxMeets-win\obj\Release\netcoreapp3.1\lxMsgBox.lxMessageBox.resources
-I:\lxndr\Documentos\visualStudio\lxMeets-win\obj\Release\netcoreapp3.1\lxMeets.GradeWindow.resources
-I:\lxndr\Documentos\visualStudio\lxMeets-win\obj\Release\netcoreapp3.1\lxMeets.lxMeets.resources
-I:\lxndr\Documentos\visualStudio\lxMeets-win\obj\Release\netcoreapp3.1\lxMeets.ScheduleWindow.resources
-I:\lxndr\Documentos\visualStudio\lxMeets-win\obj\Release\netcoreapp3.1\lxMeets.SettingsWindow.resources
-I:\lxndr\Documentos\visualStudio\lxMeets-win\obj\Release\netcoreapp3.1\lxMeets.csproj.GenerateResource.cache
-I:\lxndr\Documentos\visualStudio\lxMeets-win\bin\Release\netcoreapp3.1\lxMeets.exe
-I:\lxndr\Documentos\visualStudio\lxMeets-win\bin\Release\netcoreapp3.1\lxMeets.deps.json
-I:\lxndr\Documentos\visualStudio\lxMeets-win\bin\Release\netcoreapp3.1\lxMeets.runtimeconfig.json
-I:\lxndr\Documentos\visualStudio\lxMeets-win\bin\Release\netcoreapp3.1\lxMeets.runtimeconfig.dev.json
-I:\lxndr\Documentos\visualStudio\lxMeets-win\bin\Release\netcoreapp3.1\lxMeets.dll
-I:\lxndr\Documentos\visualStudio\lxMeets-win\bin\Release\netcoreapp3.1\lxMeets.pdb
-I:\lxndr\Documentos\visualStudio\lxMeets-win\bin\Release\netcoreapp3.1\Newtonsoft.Json.dll
-I:\lxndr\Documentos\visualStudio\lxMeets-win\bin\Release\netcoreapp3.1\NHotkey.dll
-I:\lxndr\Documentos\visualStudio\lxMeets-win\bin\Release\netcoreapp3.1\NHotkey.WindowsForms.dll
-I:\lxndr\Documentos\visualStudio\lxMeets-win\obj\Release\netcoreapp3.1\lxMeets.Properties.Resources.resources
-I:\lxndr\Documentos\visualStudio\lxMeets-win\obj\Release\netcoreapp3.1\lxMeets.AssemblyInfoInputs.cache
-I:\lxndr\Documentos\visualStudio\lxMeets-win\obj\Release\netcoreapp3.1\lxMeets.AssemblyInfo.cs
-I:\lxndr\Documentos\visualStudio\lxMeets-win\obj\Release\netcoreapp3.1\lxMeets.csproj.CoreCompileInputs.cache
-I:\lxndr\Documentos\visualStudio\lxMeets-win\obj\Release\netcoreapp3.1\lxMeets.csproj.CopyComplete
-I:\lxndr\Documentos\visualStudio\lxMeets-win\obj\Release\netcoreapp3.1\lxMeets.dll
-I:\lxndr\Documentos\visualStudio\lxMeets-win\obj\Release\netcoreapp3.1\lxMeets.pdb
-I:\lxndr\Documentos\visualStudio\lxMeets-win\obj\Release\netcoreapp3.1\lxMeets.genruntimeconfig.cache
