@@ -25,21 +25,15 @@ namespace lxMeets
 
         public lxMeets()
         {
-            try
-            {
-                string processName = Process.GetCurrentProcess().ProcessName;
-                Process[] instances = Process.GetProcessesByName(processName);
-                if (instances.Length > 1) return; else this.Show();
-                InitializeComponent();
-                fetchLatestVer();
-                fetchAPI();
-            }
-            catch { }
+            InitializeComponent();
+            fetchLatestVer();
+            fetchAPI();
             DateTime dt = DateTime.Now;
             String dayName = dt.DayOfWeek.ToString();
             comboBox1.SelectedItem = getDay(dayName);
             label2.Text = getDay(dayName);
             comboBox1.SelectedIndexChanged += ComboBox1_SelectedIndexChanged;
+            notifyIcon1.Icon = null;
             notifyIcon1.Icon = Icon;
             if (Properties.Settings.Default.UseKeyboard)
             {
@@ -240,7 +234,9 @@ namespace lxMeets
 
         private void OpenFromIcon(object sender, EventArgs e)
         {
-            this.Show();
+            fetchLatestVer();
+            fetchAPI();
+            Show();
         }
 
         private void CloseFromIcon(object sender, EventArgs e)
@@ -414,14 +410,19 @@ namespace lxMeets
         private void BarraTitulo_MouseDown(object sender, MouseEventArgs e)
         {
             ReleaseCapture();
-            SendMessage(this.Handle, 0x112, 0xf012, 0);
+            SendMessage(Handle, 0x112, 0xf012, 0);
         }
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            //this.Close();
-            this.Hide();
+            //Close();
+            Hide();
             notifyIcon1.DoubleClick += OpenFromIcon;
+            notifyIcon1.BalloonTipTitle = "lxMeets sigue en funcionamiento";
+            notifyIcon1.BalloonTipText = "Doble click al icono para volverlo a abrir";
+            notifyIcon1.BalloonTipIcon = ToolTipIcon.Info;
+            notifyIcon1.ShowBalloonTip(2000);
+            notifyIcon1.BalloonTipClicked += OpenFromIcon;
         }
         private void settings_Click(object sender, EventArgs e)
         {
@@ -438,17 +439,17 @@ namespace lxMeets
 
         private void settingsButton_MouseHover(object sender, EventArgs e)
         {
-            ToolTip1.SetToolTip(this.settingsButton, "Configuración de lxMeets");
+            ToolTip1.SetToolTip(settingsButton, "Configuración de lxMeets");
         }
 
         private void horarioexamButton_MouseHover(object sender, EventArgs e)
         {
-            ToolTip1.SetToolTip(this.horarioexamButton, "Ver horario de examenes");
+            ToolTip1.SetToolTip(horarioexamButton, "Ver horario de examenes");
         }
 
         private void horarioButton_MouseHover(object sender, EventArgs e)
         {
-            ToolTip1.SetToolTip(this.horarioButton, "Ver Horario de Clases");
+            ToolTip1.SetToolTip(horarioButton, "Ver Horario de Clases");
         }
 
         private void horarioexamButton_Click(object sender, EventArgs e)
@@ -481,7 +482,7 @@ namespace lxMeets
 
         private void openlxndrButton_MouseHover(object sender, EventArgs e)
         {
-            ToolTip1.SetToolTip(this.openlxndrButton, "Abrir sitio web");
+            ToolTip1.SetToolTip(openlxndrButton, "Abrir sitio web");
         }
 
         private void openlxndrButton_Click(object sender, EventArgs e)
@@ -496,12 +497,12 @@ namespace lxMeets
 
         private void githubButton_MouseHover(object sender, EventArgs e)
         {
-            ToolTip1.SetToolTip(this.githubButton, "Ver código fuente");
+            ToolTip1.SetToolTip(githubButton, "Ver código fuente");
         }
 
         private void notasButton_MouseHover(object sender, EventArgs e)
         {
-            ToolTip1.SetToolTip(this.notasButton, "Consulta calificaciones");
+            ToolTip1.SetToolTip(notasButton, "Consulta calificaciones");
         }
 
         private void notasButton_Click(object sender, EventArgs e)

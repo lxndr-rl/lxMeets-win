@@ -86,7 +86,6 @@ namespace lxMeets
             this.Cerrar.Name = "Cerrar";
             this.Cerrar.Size = new System.Drawing.Size(106, 22);
             this.Cerrar.Text = "Cerrar";
-            this.Cerrar.Click += CloseFromIcon;
             // 
             // label1
             // 
@@ -290,7 +289,6 @@ namespace lxMeets
             this.ControlBox = false;
             this.Controls.Add(this.cargandoAPI);
             this.Controls.Add(this.BarraTitulo);
-            this.CenterToScreen();
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.comboBox1);
