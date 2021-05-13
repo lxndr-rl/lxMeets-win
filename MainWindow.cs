@@ -140,7 +140,7 @@ namespace lxMeets
                     }
                 }
             }
-            catch (Exception error) { MessageBox.Show(error.ToString()); }
+            catch { }
         }
 
         private async void authUser(string cedula)
