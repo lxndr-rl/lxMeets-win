@@ -29,7 +29,6 @@ namespace lxMeets
             InitializeComponent();
             fetchLatestVer();
             fetchAPI();
-            MessageBox.Show(Process.GetCurrentProcess().MainModule.FileName.Replace("\\lxMeets.exe", "") + "\\updater.exe " + Process.GetCurrentProcess().MainModule.FileName.Replace("\\lxMeets.exe", ""));
             DateTime dt = DateTime.Now;
             String dayName = dt.DayOfWeek.ToString();
             comboBox1.SelectedItem = getDay(dayName);
@@ -118,27 +117,30 @@ namespace lxMeets
                 string url = @"https://lxmeets.lxndr.dev/latest.php";
                 var json = await client.DownloadStringTaskAsync(url);
                 dynamic stuff = JsonConvert.DeserializeObject(json);
+                dynamic stuffwin = stuff.windows;
                 if ((bool)stuff.examen) horarioexamButton.Visible = true;
                 if ((bool)stuff.notas) notasButton.Visible = true;
-                if (stuff.latest > Properties.Settings.Default.Version)
+                if (stuffwin.latest > Properties.Settings.Default.Version)
                 {
-                    foreach (var item in stuff.target)
+                    string seleccion = lxMessageBox.Show(stuffwin.cambios.ToString(), stuffwin.type.ToString(), lxMessageBox.Buttons.OKCancel, lxMessageBox.Icon.Warning, lxMessageBox.AnimateStyle.FadeIn).ToString();
+                    if (seleccion == "OK")
                     {
-                        if (item.ToString() == "windows" || item.ToString() == "all")
+                        try
                         {
-                            string seleccion = lxMessageBox.Show(stuff.cambios.ToString(), stuff.type.ToString(), lxMessageBox.Buttons.OKCancel, lxMessageBox.Icon.Warning, lxMessageBox.AnimateStyle.FadeIn).ToString();
-                            if (seleccion == "OK")
-                            {
-                                ProcessStartInfo startInfo = new ProcessStartInfo();
-                                startInfo.FileName = Process.GetCurrentProcess().MainModule.FileName.Replace("\\lxMeets.exe", "") + "\\updater.exe ";
-                                startInfo.Arguments = Process.GetCurrentProcess().MainModule.FileName.Replace("\\lxMeets.exe", "");
-                                Process.Start(startInfo);
-                            }
+                            ProcessStartInfo startInfo = new ProcessStartInfo();
+                            startInfo.FileName = Process.GetCurrentProcess().MainModule.FileName.Replace("\\lxMeets.exe", "") + "\\updater.exe ";
+                            startInfo.Arguments = Process.GetCurrentProcess().MainModule.FileName.Replace("\\lxMeets.exe", "");
+                            Process.Start(startInfo);
                         }
+                        catch
+                        {
+                            MessageBox.Show("Ocurrió un error actualizando. Asegúrate de tener updater en la misma ruta que lxMeets");
+                        }
+
                     }
                 }
             }
-            catch { }
+            catch (Exception error) { MessageBox.Show(error.ToString()); }
         }
 
         private async void authUser(string cedula)
