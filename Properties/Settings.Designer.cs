@@ -85,7 +85,7 @@ namespace lxMeets.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1.2")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1.3")]
         public decimal Version {
             get {
                 return ((decimal)(this["Version"]));

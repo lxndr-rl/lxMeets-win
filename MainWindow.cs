@@ -19,6 +19,7 @@ namespace lxMeets
     {
         private static int lastHour1;
         private static int lastHour2;
+        private static string anteriorAsignatura = "";
         FormCollection fc = Application.OpenForms;
         ToolTip ToolTip1 = new ToolTip();
         WebClient client = new WebClient();
@@ -28,6 +29,7 @@ namespace lxMeets
             InitializeComponent();
             fetchLatestVer();
             fetchAPI();
+            MessageBox.Show(Process.GetCurrentProcess().MainModule.FileName.Replace("\\lxMeets.exe", "") + "\\updater.exe " + Process.GetCurrentProcess().MainModule.FileName.Replace("\\lxMeets.exe", ""));
             DateTime dt = DateTime.Now;
             String dayName = dt.DayOfWeek.ToString();
             comboBox1.SelectedItem = getDay(dayName);
@@ -127,7 +129,10 @@ namespace lxMeets
                             string seleccion = lxMessageBox.Show(stuff.cambios.ToString(), stuff.type.ToString(), lxMessageBox.Buttons.OKCancel, lxMessageBox.Icon.Warning, lxMessageBox.AnimateStyle.FadeIn).ToString();
                             if (seleccion == "OK")
                             {
-                                OpenUrl1("https://lxmeets.lxndr.dev/");
+                                ProcessStartInfo startInfo = new ProcessStartInfo();
+                                startInfo.FileName = Process.GetCurrentProcess().MainModule.FileName.Replace("\\lxMeets.exe", "") + "\\updater.exe ";
+                                startInfo.Arguments = Process.GetCurrentProcess().MainModule.FileName.Replace("\\lxMeets.exe", "");
+                                Process.Start(startInfo);
                             }
                         }
                     }
@@ -270,7 +275,6 @@ namespace lxMeets
                 }
             }
             catch { }
-            if (Properties.Settings.Default.FirstRun) RegisterInStartup();
             cargandoAPI.Visible = false;
         }
 
@@ -353,10 +357,11 @@ namespace lxMeets
             try
             {
                 string url = @"https://api.lxndr.dev/uae/meets/exacto.php?hora=" + RoundUp(DateTime.Parse(DateTime.Now.ToString("HH") + ":" + DateTime.Now.ToString("mm") + ":00"), TimeSpan.FromMinutes(15)).ToShortTimeString();
-
                 var json = await client.DownloadStringTaskAsync(url);
                 dynamic stuff = JsonConvert.DeserializeObject(json);
+                if ((int)stuff.diff == 0) if (anteriorAsignatura == stuff.materia.ToString()) return;
                 if (stuff.materia.ToString() == "No hay nada por ahora" || !Properties.Settings.Default.Notifications) return;
+                anteriorAsignatura = stuff.materia.ToString();
                 notifyIcon1.BalloonTipTitle = "lxMeets";
                 notifyIcon1.BalloonTipText = "Dentro de 5 minutos: " + stuff.materia.ToString();
                 notifyIcon1.ShowBalloonTip(1000);
@@ -371,7 +376,9 @@ namespace lxMeets
                 string url = @"https://api.lxndr.dev/uae/meets/exacto.php";
                 var json = await client.DownloadStringTaskAsync(url);
                 dynamic stuff = JsonConvert.DeserializeObject(json);
+                if ((int)stuff.diff == 0) if (anteriorAsignatura == stuff.materia.ToString()) return;
                 if (stuff.materia.ToString() == "No hay nada por ahora" || !Properties.Settings.Default.Notifications) return;
+                anteriorAsignatura = stuff.materia.ToString();
                 notifyIcon1.BalloonTipTitle = stuff.materia.ToString();
                 notifyIcon1.BalloonTipText = stuff.hora.ToString();
                 notifyIcon1.ShowBalloonTip(1000);
