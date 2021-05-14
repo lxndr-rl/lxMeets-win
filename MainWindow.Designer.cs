@@ -1,6 +1,4 @@
-﻿using System.Drawing;
-
-namespace lxMeets
+﻿namespace lxMeets
 {
     partial class lxMeets
     {
@@ -86,7 +84,6 @@ namespace lxMeets
             this.Cerrar.Name = "Cerrar";
             this.Cerrar.Size = new System.Drawing.Size(106, 22);
             this.Cerrar.Text = "Cerrar";
-            this.Cerrar.Click += CloseFromIcon;
             // 
             // label1
             // 
@@ -127,8 +124,8 @@ namespace lxMeets
             // 
             // flowLayoutPanel1
             // 
-            this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.flowLayoutPanel1.AutoScroll = true;
             this.flowLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
@@ -291,7 +288,6 @@ namespace lxMeets
             this.Controls.Add(this.cargandoAPI);
             this.Controls.Add(this.BarraTitulo);
             this.Controls.Add(this.flowLayoutPanel1);
-            this.CenterToScreen();
             this.Controls.Add(this.label2);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label1);
@@ -304,12 +300,12 @@ namespace lxMeets
             this.Opacity = 0.7D;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "lxMeets";
+            this.Shown += new System.EventHandler(this.lxMeets_Shown);
             this.contextMenuStrip1.ResumeLayout(false);
             this.BarraTitulo.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.cargandoAPI)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-            if (Properties.Settings.Default.FirstRun) RegisterInStartup();
 
         }
 

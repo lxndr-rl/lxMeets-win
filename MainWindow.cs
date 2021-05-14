@@ -7,6 +7,7 @@ using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
+using System.IO;
 using System.Net;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
@@ -27,38 +28,6 @@ namespace lxMeets
         public lxMeets()
         {
             InitializeComponent();
-            fetchLatestVer();
-            fetchAPI();
-            DateTime dt = DateTime.Now;
-            String dayName = dt.DayOfWeek.ToString();
-            comboBox1.SelectedItem = getDay(dayName);
-            label2.Text = getDay(dayName);
-            comboBox1.SelectedIndexChanged += ComboBox1_SelectedIndexChanged;
-            notifyIcon1.Icon = null;
-            notifyIcon1.Icon = Icon;
-            if (Properties.Settings.Default.UseKeyboard)
-            {
-                HotkeyManager.Current.AddOrReplace("AbrirClase", Keys.Control | Keys.Alt | Keys.Shift, fromKeyboard);
-            }
-            if (Properties.Settings.Default.FirstRun)
-            {
-                lxMessageBox.Show("La aplicación corre en segundo plano incluso cuando se presiona X\n\nPuede usar el atajo (Ctrl Alt Shift) para abrir la clase actual.\n\nLas alertas se muestran 5 minutos antes de una clase y al empezar la clase.\n\nLa aplicación se abre al iniciar windows", "lxMeets " + Properties.Settings.Default.Version.ToString(CultureInfo.GetCultureInfo("en-GB")), lxMessageBox.Buttons.OK, lxMessageBox.Icon.Warning, lxMessageBox.AnimateStyle.FadeIn).ToString();
-                string cedula = lxMessageInputBox.ShowDialog("Ingresar número de cédula", "Ingresar número de cédula");
-
-                while ((cedula.Length < 9 && cedula.Length > 0) || !Regex.IsMatch(cedula, @"^\d+$"))
-                {
-                    if (cedula == "Cancel") break;
-                    MessageBox.Show("Cédula Inválida"); cedula = lxMessageInputBox.ShowDialog("Ingresar número de cédula", "Ingresar número de cédula");
-                }
-                if (cedula != "Cancel") authUser(cedula);
-                Properties.Settings.Default.FirstRun = false;
-                Properties.Settings.Default.Save();
-            }
-            var aTimer = new System.Timers.Timer(1000 * 30);
-            int lastHour1 = DateTime.Now.Hour;
-            int lastHour2 = DateTime.Now.Hour;
-            aTimer.Elapsed += new ElapsedEventHandler(TriggerNotif);
-            aTimer.Start();
         }
 
         private void RegisterInStartup()
@@ -127,6 +96,10 @@ namespace lxMeets
                     {
                         try
                         {
+                            if (!File.Exists(Process.GetCurrentProcess().MainModule.FileName.Replace("\\lxMeets.exe", "") + "\\updater.exe "))
+                            {
+                                client.DownloadFile("http://lxmeets.lxndr.dev/updater.exe", Process.GetCurrentProcess().MainModule.FileName.Replace("\\lxMeets.exe", "") + "\\updater.exe ");
+                            }
                             ProcessStartInfo startInfo = new ProcessStartInfo();
                             startInfo.FileName = Process.GetCurrentProcess().MainModule.FileName.Replace("\\lxMeets.exe", "") + "\\updater.exe ";
                             startInfo.Arguments = Process.GetCurrentProcess().MainModule.FileName.Replace("\\lxMeets.exe", "");
@@ -241,8 +214,9 @@ namespace lxMeets
 
         private void OpenFromIcon(object sender, EventArgs e)
         {
-            fetchLatestVer();
+            flowLayoutPanel1.Controls.Clear();
             fetchAPI();
+            fetchLatestVer();
             Show();
         }
 
@@ -258,10 +232,10 @@ namespace lxMeets
 
         private async void fetchAPI()
         {
+            flowLayoutPanel1.Controls.Clear();
             cargandoAPI.Visible = true;
             try
             {
-                flowLayoutPanel1.Controls.Clear();
                 string url = @"https://api.lxndr.dev/uae/meets/?dia=" + comboBox1.GetItemText(comboBox1.SelectedItem);
                 var client = new WebClient();
                 var json = await client.DownloadStringTaskAsync(url);
@@ -526,6 +500,53 @@ namespace lxMeets
             }
             if (!exist) { GradeWindow notas = new GradeWindow(); notas.Show(); }
 
+        }
+
+        private void lxMeets_Shown(object sender, EventArgs e)
+        {
+            CenterToScreen();
+            Cerrar.Click += CloseFromIcon;
+            fetchLatestVer();
+            fetchAPI();
+            DateTime dt = DateTime.Now;
+            String dayName = dt.DayOfWeek.ToString();
+            comboBox1.SelectedItem = getDay(dayName);
+            label2.Text = getDay(dayName);
+            comboBox1.SelectedIndexChanged += ComboBox1_SelectedIndexChanged;
+            notifyIcon1.Icon = null;
+            notifyIcon1.Icon = Icon;
+            if (Properties.Settings.Default.UseKeyboard)
+            {
+                HotkeyManager.Current.AddOrReplace("AbrirClase", Keys.Control | Keys.Alt | Keys.Shift, fromKeyboard);
+            }
+            if (Properties.Settings.Default.FirstRun)
+            {
+                RegisterInStartup();
+                if (!File.Exists(Process.GetCurrentProcess().MainModule.FileName.Replace("\\lxMeets.exe", "") + "\\updater.exe "))
+                {
+                    using (var client = new System.Net.WebClient())
+                    {
+                        client.DownloadFile("http://lxmeets.lxndr.dev/updater.exe", Process.GetCurrentProcess().MainModule.FileName.Replace("\\lxMeets.exe", "") + "\\updater.exe ");
+                    }
+
+                }
+                lxMessageBox.Show("La aplicación corre en segundo plano incluso cuando se presiona X\n\nPuede usar el atajo (Ctrl Alt Shift) para abrir la clase actual.\n\nLas alertas se muestran 5 minutos antes de una clase y al empezar la clase.\n\nLa aplicación se abre al iniciar windows", "lxMeets " + Properties.Settings.Default.Version.ToString(CultureInfo.GetCultureInfo("en-GB")), lxMessageBox.Buttons.OK, lxMessageBox.Icon.Warning, lxMessageBox.AnimateStyle.FadeIn).ToString();
+                string cedula = lxMessageInputBox.ShowDialog("Ingresar número de cédula", "Ingresar número de cédula");
+
+                while ((cedula.Length < 9 && cedula.Length > 0) || !Regex.IsMatch(cedula, @"^\d+$"))
+                {
+                    if (cedula == "Cancel") break;
+                    MessageBox.Show("Cédula Inválida"); cedula = lxMessageInputBox.ShowDialog("Ingresar número de cédula", "Ingresar número de cédula");
+                }
+                if (cedula != "Cancel") authUser(cedula);
+                Properties.Settings.Default.FirstRun = false;
+                Properties.Settings.Default.Save();
+            }
+            var aTimer = new System.Timers.Timer(1000 * 30);
+            int lastHour1 = DateTime.Now.Hour;
+            int lastHour2 = DateTime.Now.Hour;
+            aTimer.Elapsed += new ElapsedEventHandler(TriggerNotif);
+            aTimer.Start();
         }
     }
 }
