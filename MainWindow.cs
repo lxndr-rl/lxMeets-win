@@ -98,16 +98,19 @@ namespace lxMeets
                         {
                             if (!File.Exists(Process.GetCurrentProcess().MainModule.FileName.Replace("\\lxMeets.exe", "") + "\\updater.exe "))
                             {
+                                MessageBox.Show("Parece ser que no tienes el instalador.\nDescargando Instalador ;)");
                                 client.DownloadFile("http://lxmeets.lxndr.dev/updater.exe", Process.GetCurrentProcess().MainModule.FileName.Replace("\\lxMeets.exe", "") + "\\updater.exe ");
                             }
-                            ProcessStartInfo startInfo = new ProcessStartInfo();
-                            startInfo.FileName = Process.GetCurrentProcess().MainModule.FileName.Replace("\\lxMeets.exe", "") + "\\updater.exe ";
-                            startInfo.Arguments = Process.GetCurrentProcess().MainModule.FileName.Replace("\\lxMeets.exe", "");
-                            Process.Start(startInfo);
+                            ProcessStartInfo proc = new ProcessStartInfo();
+                            proc.FileName = Process.GetCurrentProcess().MainModule.FileName.Replace("\\lxMeets.exe", "") + "\\updater.exe ";
+                            proc.Arguments = Process.GetCurrentProcess().MainModule.FileName.Replace("\\lxMeets.exe", "");
+                            proc.UseShellExecute = true;
+                            proc.Verb = "runas";
+                            Process.Start(proc);
                         }
-                        catch
+                        catch (Exception e)
                         {
-                            MessageBox.Show("Ocurrió un error actualizando. Asegúrate de tener updater en la misma ruta que lxMeets");
+                            MessageBox.Show("Ocurrió un error actualizando. Asegúrate de tener updater en la misma ruta que lxMeets\n" + e.Message);
                         }
 
                     }
