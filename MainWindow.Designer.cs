@@ -64,7 +64,7 @@
             this.reloadButton.TabIndex = 0;
             this.reloadButton.Text = "Recargar";
             this.reloadButton.UseVisualStyleBackColor = false;
-            this.reloadButton.Click += new System.EventHandler(this.button1_Click);
+            this.reloadButton.Click += new System.EventHandler(this.Button1_Click);
             // 
             // notifyIcon1
             // 
@@ -124,8 +124,8 @@
             // 
             // flowLayoutPanel1
             // 
-            this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.flowLayoutPanel1.AutoScroll = true;
             this.flowLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
@@ -167,8 +167,8 @@
             this.notasButton.TabIndex = 7;
             this.notasButton.UseVisualStyleBackColor = false;
             this.notasButton.Visible = false;
-            this.notasButton.Click += new System.EventHandler(this.notasButton_Click);
-            this.notasButton.MouseHover += new System.EventHandler(this.notasButton_MouseHover);
+            this.notasButton.Click += new System.EventHandler(this.NotasButton_Click);
+            this.notasButton.MouseHover += new System.EventHandler(this.NotasButton_MouseHover);
             // 
             // githubButton
             // 
@@ -183,8 +183,8 @@
             this.githubButton.Size = new System.Drawing.Size(29, 25);
             this.githubButton.TabIndex = 7;
             this.githubButton.UseVisualStyleBackColor = false;
-            this.githubButton.Click += new System.EventHandler(this.githubButton_Click);
-            this.githubButton.MouseHover += new System.EventHandler(this.githubButton_MouseHover);
+            this.githubButton.Click += new System.EventHandler(this.GithubButton_Click);
+            this.githubButton.MouseHover += new System.EventHandler(this.GithubButton_MouseHover);
             // 
             // openlxndrButton
             // 
@@ -199,8 +199,8 @@
             this.openlxndrButton.Size = new System.Drawing.Size(29, 25);
             this.openlxndrButton.TabIndex = 7;
             this.openlxndrButton.UseVisualStyleBackColor = false;
-            this.openlxndrButton.Click += new System.EventHandler(this.openlxndrButton_Click);
-            this.openlxndrButton.MouseHover += new System.EventHandler(this.openlxndrButton_MouseHover);
+            this.openlxndrButton.Click += new System.EventHandler(this.OpenlxndrButton_Click);
+            this.openlxndrButton.MouseHover += new System.EventHandler(this.OpenlxndrButton_MouseHover);
             // 
             // horarioexamButton
             // 
@@ -216,8 +216,8 @@
             this.horarioexamButton.TabIndex = 7;
             this.horarioexamButton.UseVisualStyleBackColor = false;
             this.horarioexamButton.Visible = false;
-            this.horarioexamButton.Click += new System.EventHandler(this.horarioexamButton_Click);
-            this.horarioexamButton.MouseHover += new System.EventHandler(this.horarioexamButton_MouseHover);
+            this.horarioexamButton.Click += new System.EventHandler(this.HorarioexamButton_Click);
+            this.horarioexamButton.MouseHover += new System.EventHandler(this.HorarioexamButton_MouseHover);
             // 
             // horarioButton
             // 
@@ -232,8 +232,8 @@
             this.horarioButton.Size = new System.Drawing.Size(29, 25);
             this.horarioButton.TabIndex = 7;
             this.horarioButton.UseVisualStyleBackColor = false;
-            this.horarioButton.Click += new System.EventHandler(this.horarioButton_Click);
-            this.horarioButton.MouseHover += new System.EventHandler(this.horarioButton_MouseHover);
+            this.horarioButton.Click += new System.EventHandler(this.HorarioButton_Click);
+            this.horarioButton.MouseHover += new System.EventHandler(this.HorarioButton_MouseHover);
             // 
             // settingsButton
             // 
@@ -248,8 +248,8 @@
             this.settingsButton.Size = new System.Drawing.Size(29, 25);
             this.settingsButton.TabIndex = 7;
             this.settingsButton.UseVisualStyleBackColor = false;
-            this.settingsButton.Click += new System.EventHandler(this.settings_Click);
-            this.settingsButton.MouseHover += new System.EventHandler(this.settingsButton_MouseHover);
+            this.settingsButton.Click += new System.EventHandler(this.Settings_Click);
+            this.settingsButton.MouseHover += new System.EventHandler(this.SettingsButton_MouseHover);
             // 
             // closeButton
             // 
@@ -264,7 +264,7 @@
             this.closeButton.Size = new System.Drawing.Size(29, 25);
             this.closeButton.TabIndex = 7;
             this.closeButton.UseVisualStyleBackColor = false;
-            this.closeButton.Click += new System.EventHandler(this.button1_Click_1);
+            this.closeButton.Click += new System.EventHandler(this.Button1_Click_1);
             // 
             // cargandoAPI
             // 

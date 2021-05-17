@@ -4,11 +4,13 @@ using Newtonsoft.Json;
 using NHotkey;
 using NHotkey.WindowsForms;
 using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Net;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Timers;
@@ -16,14 +18,16 @@ using System.Windows.Forms;
 
 namespace lxMeets
 {
+#pragma warning disable IDE1006 // Estilos de nombres
     public partial class lxMeets : Form
+#pragma warning restore IDE1006 // Estilos de nombres
     {
         private static int lastHour1;
         private static int lastHour2;
         private static string anteriorAsignatura = "";
-        FormCollection fc = Application.OpenForms;
-        ToolTip ToolTip1 = new ToolTip();
-        WebClient client = new WebClient();
+        private readonly FormCollection fc = Application.OpenForms;
+        private readonly ToolTip ToolTip1 = new ToolTip();
+        readonly WebClient client = new WebClient();
 
         public lxMeets()
         {
@@ -79,7 +83,7 @@ namespace lxMeets
             }
         }
 
-        private async void fetchLatestVer()
+        private async void FetchLatestVer()
         {
             try
             {
@@ -101,11 +105,13 @@ namespace lxMeets
                                 MessageBox.Show("Parece ser que no tienes el instalador.\nDescargando Instalador ;)");
                                 client.DownloadFile("http://lxmeets.lxndr.dev/updater.exe", Process.GetCurrentProcess().MainModule.FileName.Replace("\\lxMeets.exe", "") + "\\updater.exe ");
                             }
-                            ProcessStartInfo proc = new ProcessStartInfo();
-                            proc.FileName = Process.GetCurrentProcess().MainModule.FileName.Replace("\\lxMeets.exe", "") + "\\updater.exe ";
-                            proc.Arguments = Process.GetCurrentProcess().MainModule.FileName.Replace("\\lxMeets.exe", "");
-                            proc.UseShellExecute = true;
-                            proc.Verb = "runas";
+                            ProcessStartInfo proc = new ProcessStartInfo
+                            {
+                                FileName = Process.GetCurrentProcess().MainModule.FileName.Replace("\\lxMeets.exe", "") + "\\updater.exe ",
+                                Arguments = Process.GetCurrentProcess().MainModule.FileName.Replace("\\lxMeets.exe", ""),
+                                UseShellExecute = true,
+                                Verb = "runas"
+                            };
                             Process.Start(proc);
                         }
                         catch (Exception e)
@@ -119,7 +125,7 @@ namespace lxMeets
             catch { }
         }
 
-        private async void authUser(string cedula)
+        private async void AuthUser(string cedula)
         {
             try
             {
@@ -139,7 +145,7 @@ namespace lxMeets
                             if (cedula == "Cancel") break;
                             MessageBox.Show("Cédula Inválida"); cedula = lxMessageInputBox.ShowDialog("Ingresar número de cédula", "Ingresar número de cédula");
                         }
-                        if (cedula != "Cancel") authUser(cedula);
+                        if (cedula != "Cancel") AuthUser(cedula);
                         break;
                     }
                 }
@@ -152,7 +158,7 @@ namespace lxMeets
             catch { }
         }
 
-        public async void fromKeyboard(object sender, HotkeyEventArgs e)
+        public async void FromKeyboard(object sender, HotkeyEventArgs e)
         {
             e.Handled = true;
             try
@@ -174,11 +180,11 @@ namespace lxMeets
 
         private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            fetchAPI();
+            FetchAPI();
             label2.Text = comboBox1.GetItemText(comboBox1.SelectedItem);
         }
 
-        private string getDay(string dayName)
+        private string GetDay(string dayName)
         {
             if (dayName == "Monday" || dayName == "Lunes")
             {
@@ -218,8 +224,8 @@ namespace lxMeets
         private void OpenFromIcon(object sender, EventArgs e)
         {
             flowLayoutPanel1.Controls.Clear();
-            fetchAPI();
-            fetchLatestVer();
+            FetchAPI();
+            FetchLatestVer();
             Show();
         }
 
@@ -233,7 +239,7 @@ namespace lxMeets
 
         }
 
-        private async void fetchAPI()
+        private async void FetchAPI()
         {
             flowLayoutPanel1.Controls.Clear();
             cargandoAPI.Visible = true;
@@ -243,11 +249,11 @@ namespace lxMeets
                 var client = new WebClient();
                 var json = await client.DownloadStringTaskAsync(url);
                 dynamic stuff = JsonConvert.DeserializeObject(json);
-
+                flowLayoutPanel1.Controls.Clear();
                 foreach (var s in stuff)
                 {
                     if (s.materia.ToString() == "No hay nada por ahora") { cargandoAPI.Visible = false; return; }
-                    Button l = addButton(s.materia.ToString(), s.hora.ToString());
+                    Button l = AddButton(s.materia.ToString(), s.hora.ToString());
                     flowLayoutPanel1.Controls.Add(l);
                     l.Click += delegate (object sender, EventArgs e) { ShowAlert(sender, e, s.materia.ToString(), s.hora.ToString(), s.url.ToString()); };
 
@@ -285,7 +291,9 @@ namespace lxMeets
             }
         }
 
+#pragma warning disable IDE0060 // Quitar el parámetro no utilizado
         private void OpenUrl2(object sender, EventArgs e, string url)
+#pragma warning restore IDE0060 // Quitar el parámetro no utilizado
         {
             try
             {
@@ -313,7 +321,9 @@ namespace lxMeets
             }
         }
 
+#pragma warning disable IDE0060 // Quitar el parámetro no utilizado
         private void ShowAlert(object sender, EventArgs e, string materia, string horas, string url)
+#pragma warning restore IDE0060 // Quitar el parámetro no utilizado
         {
             string seleccion = lxMessageBox.Show(horas, materia, lxMessageBox.Buttons.YesNoCancel, lxMessageBox.Icon.Warning, lxMessageBox.AnimateStyle.FadeIn).ToString();
             if (seleccion == "No")
@@ -333,6 +343,7 @@ namespace lxMeets
 
         private async void FiveMinutes()
         {
+            RemoveClickEvent(notifyIcon1);
             try
             {
                 string url = @"https://api.lxndr.dev/uae/meets/exacto.php?hora=" + RoundUp(DateTime.Parse(DateTime.Now.ToString("HH") + ":" + DateTime.Now.ToString("mm") + ":00"), TimeSpan.FromMinutes(15)).ToShortTimeString();
@@ -348,8 +359,22 @@ namespace lxMeets
             }
             catch { }
         }
+        private void RemoveClickEvent(NotifyIcon b)
+        {
+            FieldInfo f1 = typeof(Control).GetField("EventClick",
+                BindingFlags.Static | BindingFlags.NonPublic);
+
+            object obj = f1.GetValue(b);
+            PropertyInfo pi = b.GetType().GetProperty("Events",
+                BindingFlags.NonPublic | BindingFlags.Instance);
+
+            EventHandlerList list = (EventHandlerList)pi.GetValue(b, null);
+            list.RemoveHandler(obj, list[obj]);
+        }
+
         private async void InstantAlert()
         {
+            RemoveClickEvent(notifyIcon1);
             try
             {
                 string url = @"https://api.lxndr.dev/uae/meets/exacto.php";
@@ -366,11 +391,13 @@ namespace lxMeets
             catch { }
         }
 
-        Button addButton(string materia, string hora)
+        Button AddButton(string materia, string hora)
         {
-            Button lx = new Button();
-            lx.Name = materia;
-            lx.Text = materia + "\n" + hora;
+            Button lx = new Button
+            {
+                Name = materia,
+                Text = materia + "\n" + hora
+            };
             lx.FlatAppearance.MouseOverBackColor = Color.Gray;
             lx.FlatStyle = FlatStyle.Flat;
             lx.ForeColor = Color.White;
@@ -383,15 +410,15 @@ namespace lxMeets
             return lx;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
         {
-            fetchAPI();
+            FetchAPI();
         }
 
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
-        private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int lParam);
+        private extern static void SendMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);
 
         private void BarraTitulo_MouseDown(object sender, MouseEventArgs e)
         {
@@ -399,7 +426,7 @@ namespace lxMeets
             SendMessage(Handle, 0x112, 0xf012, 0);
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
+        private void Button1_Click_1(object sender, EventArgs e)
         {
             //Close();
             Hide();
@@ -410,35 +437,32 @@ namespace lxMeets
             notifyIcon1.ShowBalloonTip(2000);
             notifyIcon1.BalloonTipClicked += OpenFromIcon;
         }
-        private void settings_Click(object sender, EventArgs e)
+        private void Settings_Click(object sender, EventArgs e)
         {
             bool exist = false;
             foreach (Form frm in fc)
             {
-                if (frm.Name == "SettingsWindow")
-                {
-                    exist = true;
-                }
+                if (frm.Name == "SettingsWindow") exist = true;
             }
             if (!exist) { SettingsWindow Settings = new SettingsWindow(); Settings.Show(); }
         }
 
-        private void settingsButton_MouseHover(object sender, EventArgs e)
+        private void SettingsButton_MouseHover(object sender, EventArgs e)
         {
             ToolTip1.SetToolTip(settingsButton, "Configuración de lxMeets");
         }
 
-        private void horarioexamButton_MouseHover(object sender, EventArgs e)
+        private void HorarioexamButton_MouseHover(object sender, EventArgs e)
         {
             ToolTip1.SetToolTip(horarioexamButton, "Ver horario de examenes");
         }
 
-        private void horarioButton_MouseHover(object sender, EventArgs e)
+        private void HorarioButton_MouseHover(object sender, EventArgs e)
         {
             ToolTip1.SetToolTip(horarioButton, "Ver Horario de Clases");
         }
 
-        private void horarioexamButton_Click(object sender, EventArgs e)
+        private void HorarioexamButton_Click(object sender, EventArgs e)
         {
             bool exist = false;
             foreach (Form frm in fc)
@@ -452,7 +476,7 @@ namespace lxMeets
 
         }
 
-        private void horarioButton_Click(object sender, EventArgs e)
+        private void HorarioButton_Click(object sender, EventArgs e)
         {
 
             bool exist = false;
@@ -466,32 +490,32 @@ namespace lxMeets
             if (!exist) { ScheduleWindow horarioEx = new ScheduleWindow("Clase"); horarioEx.Show(); }
         }
 
-        private void openlxndrButton_MouseHover(object sender, EventArgs e)
+        private void OpenlxndrButton_MouseHover(object sender, EventArgs e)
         {
             ToolTip1.SetToolTip(openlxndrButton, "Abrir sitio web");
         }
 
-        private void openlxndrButton_Click(object sender, EventArgs e)
+        private void OpenlxndrButton_Click(object sender, EventArgs e)
         {
             OpenUrl1("https://lxmeets.lxndr.dev");
         }
 
-        private void githubButton_Click(object sender, EventArgs e)
+        private void GithubButton_Click(object sender, EventArgs e)
         {
             OpenUrl1("https://github.com/lxndr-rl/lxMeets-win");
         }
 
-        private void githubButton_MouseHover(object sender, EventArgs e)
+        private void GithubButton_MouseHover(object sender, EventArgs e)
         {
             ToolTip1.SetToolTip(githubButton, "Ver código fuente");
         }
 
-        private void notasButton_MouseHover(object sender, EventArgs e)
+        private void NotasButton_MouseHover(object sender, EventArgs e)
         {
             ToolTip1.SetToolTip(notasButton, "Consulta calificaciones");
         }
 
-        private void notasButton_Click(object sender, EventArgs e)
+        private void NotasButton_Click(object sender, EventArgs e)
         {
             bool exist = false;
             foreach (Form frm in fc)
@@ -505,34 +529,40 @@ namespace lxMeets
 
         }
 
+#pragma warning disable IDE1006 // Estilos de nombres
         private void lxMeets_Shown(object sender, EventArgs e)
+#pragma warning restore IDE1006 // Estilos de nombres
         {
             CenterToScreen();
             Cerrar.Click += CloseFromIcon;
-            fetchLatestVer();
-            fetchAPI();
+            FetchLatestVer();
+            FetchAPI();
             DateTime dt = DateTime.Now;
             String dayName = dt.DayOfWeek.ToString();
-            comboBox1.SelectedItem = getDay(dayName);
-            label2.Text = getDay(dayName);
+            comboBox1.SelectedItem = GetDay(dayName);
+            label2.Text = GetDay(dayName);
             comboBox1.SelectedIndexChanged += ComboBox1_SelectedIndexChanged;
             notifyIcon1.Icon = null;
             notifyIcon1.Icon = Icon;
             if (Properties.Settings.Default.UseKeyboard)
             {
-                HotkeyManager.Current.AddOrReplace("AbrirClase", Keys.Control | Keys.Alt | Keys.Shift, fromKeyboard);
+                try
+                {
+                    HotkeyManager.Current.AddOrReplace("AbrirClase", Keys.Control | Keys.Alt | Keys.Shift, FromKeyboard);
+                }
+                catch { }
             }
             if (Properties.Settings.Default.FirstRun)
             {
                 RegisterInStartup();
-                if (!File.Exists(Process.GetCurrentProcess().MainModule.FileName.Replace("\\lxMeets.exe", "") + "\\updater.exe "))
+                try
                 {
-                    using (var client = new System.Net.WebClient())
+                    if (!File.Exists(Process.GetCurrentProcess().MainModule.FileName.Replace("\\lxMeets.exe", "") + "\\updater.exe "))
                     {
                         client.DownloadFile("http://lxmeets.lxndr.dev/updater.exe", Process.GetCurrentProcess().MainModule.FileName.Replace("\\lxMeets.exe", "") + "\\updater.exe ");
                     }
-
                 }
+                catch { }
                 lxMessageBox.Show("La aplicación corre en segundo plano incluso cuando se presiona X\n\nPuede usar el atajo (Ctrl Alt Shift) para abrir la clase actual.\n\nLas alertas se muestran 5 minutos antes de una clase y al empezar la clase.\n\nLa aplicación se abre al iniciar windows", "lxMeets " + Properties.Settings.Default.Version.ToString(CultureInfo.GetCultureInfo("en-GB")), lxMessageBox.Buttons.OK, lxMessageBox.Icon.Warning, lxMessageBox.AnimateStyle.FadeIn).ToString();
                 string cedula = lxMessageInputBox.ShowDialog("Ingresar número de cédula", "Ingresar número de cédula");
 
@@ -541,7 +571,7 @@ namespace lxMeets
                     if (cedula == "Cancel") break;
                     MessageBox.Show("Cédula Inválida"); cedula = lxMessageInputBox.ShowDialog("Ingresar número de cédula", "Ingresar número de cédula");
                 }
-                if (cedula != "Cancel") authUser(cedula);
+                if (cedula != "Cancel") AuthUser(cedula);
                 Properties.Settings.Default.FirstRun = false;
                 Properties.Settings.Default.Save();
             }

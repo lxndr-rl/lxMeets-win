@@ -10,7 +10,7 @@ namespace lxMeets
 {
     public partial class GradeWindow : Form
     {
-        WebClient client = new WebClient();
+        private readonly WebClient client = new WebClient();
         string cedula = "";
         string anioLectivo = "";
         public GradeWindow()
@@ -30,12 +30,12 @@ namespace lxMeets
                     MessageBox.Show("Cédula Inválida"); cedula = lxMessageInputBox.ShowDialog("Ingresar número de cédula", "Ingresar número de cédula");
                 }
             }
-            if (cedula != "Cancel") fetchAPI(cedula, anioLectivo);
+            if (cedula != "Cancel") FetchAPI(cedula, anioLectivo);
 
 
         }
 
-        private async void fetchAPI(string cedula, string anioLect)
+        private async void FetchAPI(string cedula, string anioLect)
         {
             try
             {
@@ -89,8 +89,10 @@ namespace lxMeets
                         tableController.RowStyles.Add(new RowStyle(SizeType.AutoSize));
                     }
 
-                    Label cmd = new Label();
-                    cmd.AutoSize = true;
+                    Label cmd = new Label
+                    {
+                        AutoSize = true
+                    };
                     if (y == 0)
                     {
                         cmd.AutoSize = false;
@@ -106,7 +108,7 @@ namespace lxMeets
             }
         }
 
-        private void otraCButton_Click(object sender, EventArgs e)
+        private void OtraCButton_Click(object sender, EventArgs e)
         {
             cedula = lxMessageInputBox.ShowDialog("Ingresar número de cédula", "Ingresar número de cédula", true);
             anioLectivo = cedula.Split('[', ']')[1];
@@ -120,7 +122,7 @@ namespace lxMeets
             cargandoPicture.Visible = true;
             otraCButton.Visible = false;
 
-            fetchAPI(cedula, anioLectivo);
+            FetchAPI(cedula, anioLectivo);
         }
 
         private void GradeWindow_Shown(object sender, EventArgs e)
@@ -139,7 +141,7 @@ namespace lxMeets
             SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
 
-        private void cerrarButton_Click(object sender, EventArgs e)
+        private void CerrarButton_Click(object sender, EventArgs e)
         {
             this.Close();
         }

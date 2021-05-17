@@ -48,7 +48,7 @@
             this.autoRunCheck.TabIndex = 1;
             this.autoRunCheck.Text = "Auto Iniciar";
             this.autoRunCheck.UseVisualStyleBackColor = true;
-            this.autoRunCheck.CheckedChanged += new System.EventHandler(this.autoRunCheck_CheckedChanged);
+            this.autoRunCheck.CheckedChanged += new System.EventHandler(this.AutoRunCheck_CheckedChanged);
             // 
             // saveButton
             // 
@@ -95,7 +95,7 @@
             this.useKeyboardCheck.TabIndex = 1;
             this.useKeyboardCheck.Text = "Usar Atajos de Teclado";
             this.useKeyboardCheck.UseVisualStyleBackColor = true;
-            this.useKeyboardCheck.CheckedChanged += new System.EventHandler(this.useKeyboardCheck_CheckedChanged);
+            this.useKeyboardCheck.CheckedChanged += new System.EventHandler(this.UseKeyboardCheck_CheckedChanged);
             // 
             // sendNotificationsCheck
             // 
@@ -107,7 +107,7 @@
             this.sendNotificationsCheck.TabIndex = 1;
             this.sendNotificationsCheck.Text = "Notificaciones";
             this.sendNotificationsCheck.UseVisualStyleBackColor = true;
-            this.sendNotificationsCheck.CheckedChanged += new System.EventHandler(this.sendNotificationsCheck_CheckedChanged);
+            this.sendNotificationsCheck.CheckedChanged += new System.EventHandler(this.SendNotificationsCheck_CheckedChanged);
             // 
             // SettingsWindow
             // 

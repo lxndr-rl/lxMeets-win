@@ -152,7 +152,7 @@
             this.otraCButton.Text = "Consultar otro número";
             this.otraCButton.UseVisualStyleBackColor = false;
             this.otraCButton.Visible = false;
-            this.otraCButton.Click += new System.EventHandler(this.otraCButton_Click);
+            this.otraCButton.Click += new System.EventHandler(this.OtraCButton_Click);
             // 
             // cerrarButton
             // 
@@ -166,7 +166,7 @@
             this.cerrarButton.Size = new System.Drawing.Size(29, 25);
             this.cerrarButton.TabIndex = 7;
             this.cerrarButton.UseVisualStyleBackColor = false;
-            this.cerrarButton.Click += new System.EventHandler(this.cerrarButton_Click);
+            this.cerrarButton.Click += new System.EventHandler(this.CerrarButton_Click);
             // 
             // panel1
             // 

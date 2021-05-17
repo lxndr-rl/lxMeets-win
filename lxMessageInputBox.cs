@@ -9,7 +9,9 @@ using System.Windows.Forms;
 
 namespace lxMeets
 {
+#pragma warning disable IDE1006 // Estilos de nombres
     public static class lxMessageInputBox
+#pragma warning restore IDE1006 // Estilos de nombres
     {
 
         public static string ShowDialog(string title, string body, bool anio = false)
@@ -17,14 +19,20 @@ namespace lxMeets
             List<String> anios = new List<String>();
             Form prompt = new Form();
             ComboBox aniosLect = new ComboBox() { Left = 16, Width = 80, Top = 80, TabIndex = 1, TabStop = true };
+            ComponentResourceManager resources = new ComponentResourceManager(typeof(GradeWindow));
+            prompt.Width = 280;
+            prompt.Text = title;
+            Label textLabel = new Label() { Left = 16, Top = 20, Width = 240, Text = body };
+            textLabel.ForeColor = Color.White;
+            prompt.Controls.Add(textLabel);
+            prompt.Icon = ((Icon)(resources.GetObject("$this.Icon")));
+            prompt.BackColor = Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
+            prompt.FormBorderStyle = FormBorderStyle.None;
+            prompt.Opacity = 0.85D;
+            prompt.StartPosition = FormStartPosition.CenterScreen;
             if (!anio)
             {
-                ComponentResourceManager resources = new ComponentResourceManager(typeof(GradeWindow));
-                prompt.Width = 280;
                 prompt.Height = 160;
-                prompt.Text = title;
-                Label textLabel = new Label() { Left = 16, Top = 20, Width = 240, Text = body };
-                textLabel.ForeColor = Color.White;
                 TextBox textBox = new TextBox() { Left = 16, Top = 45, Width = 240, TabIndex = 0, TabStop = true };
                 Button confirmation = new Button() { Text = "Consultar", Left = 16, Width = 80, Top = 88, TabIndex = 1, TabStop = true };
                 confirmation.BackColor = Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
@@ -38,28 +46,16 @@ namespace lxMeets
                 cancelation.FlatStyle = FlatStyle.Flat;
                 cancelation.ForeColor = Color.White;
                 cancelation.Click += (sender, e) => { textBox.Text = "Cancel"; prompt.Close(); };
-                prompt.Controls.Add(textLabel);
-                prompt.Icon = ((Icon)(resources.GetObject("$this.Icon")));
                 prompt.Controls.Add(textBox);
-                prompt.BackColor = Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
-                prompt.FormBorderStyle = FormBorderStyle.None;
-                prompt.Controls.Add(confirmation);
-                prompt.Opacity = 0.85D;
                 prompt.AcceptButton = confirmation;
                 prompt.Controls.Add(cancelation);
                 prompt.CancelButton = cancelation;
-                prompt.StartPosition = FormStartPosition.CenterScreen;
                 prompt.ShowDialog();
                 return textBox.Text;
             }
             else
             {
-                ComponentResourceManager resources = new ComponentResourceManager(typeof(GradeWindow));
-                prompt.Width = 280;
                 prompt.Height = 200;
-                prompt.Text = title;
-                Label textLabel = new Label() { Left = 16, Top = 20, Width = 240, Text = body };
-                textLabel.ForeColor = Color.White;
                 TextBox textBox = new TextBox() { Left = 16, Top = 45, Width = 220, TabIndex = 0, TabStop = true };
                 Button getAnios = new Button() { Text = "↻", Left = 240, Top = 45, Width = 30, TabIndex = 0, TabStop = true };
                 getAnios.BackColor = Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
@@ -67,7 +63,6 @@ namespace lxMeets
                 getAnios.FlatStyle = FlatStyle.Flat;
                 getAnios.ForeColor = Color.White;
                 getAnios.Click += (sender, e) => { fetchAnios(textBox.Text); };
-
                 Button confirmation = new Button() { Text = "Consultar", Left = 16, Width = 80, Top = 150, TabIndex = 1, TabStop = true };
                 confirmation.BackColor = Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
                 confirmation.FlatAppearance.MouseOverBackColor = Color.Gray;
@@ -80,18 +75,12 @@ namespace lxMeets
                 cancelation.FlatStyle = FlatStyle.Flat;
                 cancelation.ForeColor = Color.White;
                 cancelation.Click += (sender, e) => { textBox.Text = "Cancel"; prompt.Close(); };
-                prompt.Controls.Add(textLabel);
-                prompt.Icon = ((Icon)(resources.GetObject("$this.Icon")));
                 prompt.Controls.Add(textBox);
-                prompt.BackColor = Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
-                prompt.FormBorderStyle = FormBorderStyle.None;
                 prompt.Controls.Add(confirmation);
                 prompt.Controls.Add(getAnios);
-                prompt.Opacity = 0.85D;
                 prompt.AcceptButton = confirmation;
                 prompt.Controls.Add(cancelation);
                 prompt.CancelButton = cancelation;
-                prompt.StartPosition = FormStartPosition.CenterScreen;
                 prompt.ShowDialog();
                 string final = "(" + textBox.Text + ")[" + aniosLect.SelectedItem + "]";
                 return final;

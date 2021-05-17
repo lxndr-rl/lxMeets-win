@@ -25,12 +25,12 @@ namespace lxMeets
             this.Close();
         }
 
-        private void useKeyboardCheck_CheckedChanged(object sender, EventArgs e)
+        private void UseKeyboardCheck_CheckedChanged(object sender, EventArgs e)
         {
             if (useKeyboardCheck.Checked)
             {
                 var mainForm = Application.OpenForms.OfType<lxMeets>().Single();
-                HotkeyManager.Current.AddOrReplace("AbrirClase", Keys.Control | Keys.Alt | Keys.Shift, mainForm.fromKeyboard);
+                HotkeyManager.Current.AddOrReplace("AbrirClase", Keys.Control | Keys.Alt | Keys.Shift, mainForm.FromKeyboard);
                 Properties.Settings.Default.UseKeyboard = true;
                 Properties.Settings.Default.Save();
             }
@@ -42,7 +42,7 @@ namespace lxMeets
             }
         }
 
-        private void autoRunCheck_CheckedChanged(object sender, EventArgs e)
+        private void AutoRunCheck_CheckedChanged(object sender, EventArgs e)
         {
             RegistryKey registryKey = Registry.CurrentUser.OpenSubKey
                     ("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
@@ -62,7 +62,7 @@ namespace lxMeets
 
         }
 
-        private void sendNotificationsCheck_CheckedChanged(object sender, EventArgs e)
+        private void SendNotificationsCheck_CheckedChanged(object sender, EventArgs e)
         {
             if (sendNotificationsCheck.Checked)
             {

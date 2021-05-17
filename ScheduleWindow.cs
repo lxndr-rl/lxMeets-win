@@ -20,15 +20,15 @@ namespace lxMeets
             }
             else tipo = "loop.gif";
             horarioPicture.LoadAsync("https://lxmeets.lxndr.dev/res/" + tipo);
-            horarioPicture.LoadCompleted += horarioCargado;
+            horarioPicture.LoadCompleted += HorarioCargado;
 
 
         }
-        private void horarioCargado(Object sender, AsyncCompletedEventArgs e)
+        private void HorarioCargado(Object sender, AsyncCompletedEventArgs e)
         {
             cargandoPic.Visible = false;
         }
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
         {
             this.Close();
         }
