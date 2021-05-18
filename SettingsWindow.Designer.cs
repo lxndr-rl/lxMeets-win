@@ -126,7 +126,6 @@
             this.Opacity = 0.85D;
             this.Text = "lxMSettings";
             this.groupBox1.ResumeLayout(false);
-            this.CenterToScreen();
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();

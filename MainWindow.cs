@@ -223,6 +223,7 @@ namespace lxMeets
 
         private void OpenFromIcon(object sender, EventArgs e)
         {
+            try { RemoveClickEvent(notifyIcon1); } catch { }
             flowLayoutPanel1.Controls.Clear();
             FetchAPI();
             FetchLatestVer();
@@ -241,6 +242,7 @@ namespace lxMeets
 
         private async void FetchAPI()
         {
+            try { RemoveClickEvent(notifyIcon1); } catch { }
             flowLayoutPanel1.Controls.Clear();
             cargandoAPI.Visible = true;
             try
@@ -343,7 +345,7 @@ namespace lxMeets
 
         private async void FiveMinutes()
         {
-            RemoveClickEvent(notifyIcon1);
+            try { RemoveClickEvent(notifyIcon1); } catch { }
             try
             {
                 string url = @"https://api.lxndr.dev/uae/meets/exacto.php?hora=" + RoundUp(DateTime.Parse(DateTime.Now.ToString("HH") + ":" + DateTime.Now.ToString("mm") + ":00"), TimeSpan.FromMinutes(15)).ToShortTimeString();
@@ -374,7 +376,7 @@ namespace lxMeets
 
         private async void InstantAlert()
         {
-            RemoveClickEvent(notifyIcon1);
+            try { RemoveClickEvent(notifyIcon1); } catch { }
             try
             {
                 string url = @"https://api.lxndr.dev/uae/meets/exacto.php";
@@ -428,6 +430,7 @@ namespace lxMeets
 
         private void Button1_Click_1(object sender, EventArgs e)
         {
+            try { RemoveClickEvent(notifyIcon1); } catch { }
             //Close();
             Hide();
             notifyIcon1.DoubleClick += OpenFromIcon;

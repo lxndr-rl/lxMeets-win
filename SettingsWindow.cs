@@ -12,6 +12,7 @@ namespace lxMeets
         public SettingsWindow()
         {
             InitializeComponent();
+            CenterToScreen();
             keyboardShortCutText.Text = Properties.Settings.Default.KeyBoardShortCut.Replace("Keys.", "");
             autoRunCheck.Checked = Properties.Settings.Default.AutoStart;
             useKeyboardCheck.Checked = Properties.Settings.Default.UseKeyboard;
@@ -27,9 +28,9 @@ namespace lxMeets
 
         private void UseKeyboardCheck_CheckedChanged(object sender, EventArgs e)
         {
+            var mainForm = Application.OpenForms.OfType<lxMeets>().Single();
             if (useKeyboardCheck.Checked)
             {
-                var mainForm = Application.OpenForms.OfType<lxMeets>().Single();
                 HotkeyManager.Current.AddOrReplace("AbrirClase", Keys.Control | Keys.Alt | Keys.Shift, mainForm.FromKeyboard);
                 Properties.Settings.Default.UseKeyboard = true;
                 Properties.Settings.Default.Save();
@@ -41,7 +42,6 @@ namespace lxMeets
                 Properties.Settings.Default.Save();
             }
         }
-
         private void AutoRunCheck_CheckedChanged(object sender, EventArgs e)
         {
             RegistryKey registryKey = Registry.CurrentUser.OpenSubKey
@@ -61,7 +61,6 @@ namespace lxMeets
 
 
         }
-
         private void SendNotificationsCheck_CheckedChanged(object sender, EventArgs e)
         {
             if (sendNotificationsCheck.Checked)

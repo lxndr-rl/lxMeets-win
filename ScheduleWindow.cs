@@ -10,6 +10,7 @@ namespace lxMeets
         public ScheduleWindow(string tipo)
         {
             InitializeComponent();
+            CenterToScreen();
             if (tipo == "Clase")
             {
                 tipo = "horario.png";
@@ -43,6 +44,5 @@ namespace lxMeets
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
-
     }
 }
