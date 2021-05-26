@@ -223,7 +223,6 @@ namespace lxMeets
 
         private void OpenFromIcon(object sender, EventArgs e)
         {
-            try { RemoveClickEvent(notifyIcon1); } catch { }
             flowLayoutPanel1.Controls.Clear();
             FetchAPI();
             FetchLatestVer();
@@ -242,7 +241,6 @@ namespace lxMeets
 
         private async void FetchAPI()
         {
-            try { RemoveClickEvent(notifyIcon1); } catch { }
             flowLayoutPanel1.Controls.Clear();
             cargandoAPI.Visible = true;
             try
@@ -345,7 +343,6 @@ namespace lxMeets
 
         private async void FiveMinutes()
         {
-            try { RemoveClickEvent(notifyIcon1); } catch { }
             try
             {
                 string url = @"https://api.lxndr.dev/uae/meets/exacto.php?hora=" + RoundUp(DateTime.Parse(DateTime.Now.ToString("HH") + ":" + DateTime.Now.ToString("mm") + ":00"), TimeSpan.FromMinutes(15)).ToShortTimeString();
@@ -376,7 +373,6 @@ namespace lxMeets
 
         private async void InstantAlert()
         {
-            try { RemoveClickEvent(notifyIcon1); } catch { }
             try
             {
                 string url = @"https://api.lxndr.dev/uae/meets/exacto.php";
@@ -436,7 +432,6 @@ namespace lxMeets
             notifyIcon1.DoubleClick += OpenFromIcon;
             notifyIcon1.BalloonTipTitle = "lxMeets sigue en funcionamiento";
             notifyIcon1.BalloonTipText = "Doble click al icono para volverlo a abrir";
-            notifyIcon1.BalloonTipIcon = ToolTipIcon.Info;
             notifyIcon1.ShowBalloonTip(2000);
             notifyIcon1.BalloonTipClicked += OpenFromIcon;
         }

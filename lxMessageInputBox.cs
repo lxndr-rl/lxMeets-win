@@ -48,6 +48,7 @@ namespace lxMeets
                 cancelation.Click += (sender, e) => { textBox.Text = "Cancel"; prompt.Close(); };
                 prompt.Controls.Add(textBox);
                 prompt.AcceptButton = confirmation;
+                prompt.Controls.Add(confirmation);
                 prompt.Controls.Add(cancelation);
                 prompt.CancelButton = cancelation;
                 prompt.ShowDialog();

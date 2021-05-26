@@ -13,12 +13,12 @@
     <NeutralLanguage>es-EC</NeutralLanguage>
     <StartupObject></StartupObject>
     <Nullable>disable</Nullable>
-    <Version>1.5</Version>
+    <Version>1.6</Version>
     <NoWin32Manifest>true</NoWin32Manifest>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>lxMeetsSignature.snk</AssemblyOriginatorKeyFile>
     <DelaySign>false</DelaySign>
-    <AssemblyVersion>1.5.0.0</AssemblyVersion>
+    <AssemblyVersion>1.6.0.0</AssemblyVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
