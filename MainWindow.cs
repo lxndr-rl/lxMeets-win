@@ -91,8 +91,8 @@ namespace lxMeets
                 var json = await client.DownloadStringTaskAsync(url);
                 dynamic stuff = JsonConvert.DeserializeObject(json);
                 dynamic stuffwin = stuff.windows;
-                if ((bool)stuff.examen) horarioexamButton.Visible = true;
-                if ((bool)stuff.notas) notasButton.Visible = true;
+                horarioexamButton.Visible = (bool)stuff.examen;
+                notasButton.Visible = (bool)stuff.examen;
                 if (stuffwin.latest > Properties.Settings.Default.Version)
                 {
                     string seleccion = lxMessageBox.Show(stuffwin.cambios.ToString(), stuffwin.type.ToString(), lxMessageBox.Buttons.OKCancel, lxMessageBox.Icon.Warning, lxMessageBox.AnimateStyle.FadeIn).ToString();
