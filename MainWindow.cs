@@ -348,7 +348,7 @@ namespace lxMeets
                 string url = @"https://api.lxndr.dev/uae/meets/exacto.php?hora=" + RoundUp(DateTime.Parse(DateTime.Now.ToString("HH") + ":" + DateTime.Now.ToString("mm") + ":00"), TimeSpan.FromMinutes(15)).ToShortTimeString();
                 var json = await client.DownloadStringTaskAsync(url);
                 dynamic stuff = JsonConvert.DeserializeObject(json);
-                if ((int)stuff.diff == 0) if (anteriorAsignatura == stuff.materia.ToString()) return;
+                if ((string)stuff.diff == "0" && (anteriorAsignatura == stuff.materia.ToString())) return;
                 if (stuff.materia.ToString() == "No hay nada por ahora" || !Properties.Settings.Default.Notifications) return;
                 anteriorAsignatura = stuff.materia.ToString();
                 notifyIcon1.BalloonTipTitle = "lxMeets";
@@ -378,7 +378,7 @@ namespace lxMeets
                 string url = @"https://api.lxndr.dev/uae/meets/exacto.php";
                 var json = await client.DownloadStringTaskAsync(url);
                 dynamic stuff = JsonConvert.DeserializeObject(json);
-                if ((int)stuff.diff == 0) if (anteriorAsignatura == stuff.materia.ToString()) return;
+                if ((string)stuff.diff == "0" && (anteriorAsignatura == stuff.materia.ToString())) return;
                 if (stuff.materia.ToString() == "No hay nada por ahora" || !Properties.Settings.Default.Notifications) return;
                 anteriorAsignatura = stuff.materia.ToString();
                 notifyIcon1.BalloonTipTitle = stuff.materia.ToString();
