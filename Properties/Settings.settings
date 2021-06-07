@@ -18,10 +18,13 @@
       <Value Profile="(Default)">Control | Alt | Shift</Value>
     </Setting>
     <Setting Name="Version" Type="System.Decimal" Scope="Application">
-      <Value Profile="(Default)">1.6</Value>
+      <Value Profile="(Default)">1.7</Value>
     </Setting>
     <Setting Name="Cedula" Type="System.String" Scope="User">
       <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="UseDefaultCed" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>
 </SettingsFile>

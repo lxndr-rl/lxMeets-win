@@ -92,7 +92,7 @@ namespace lxMeets
                 dynamic stuff = JsonConvert.DeserializeObject(json);
                 dynamic stuffwin = stuff.windows;
                 horarioexamButton.Visible = (bool)stuff.examen;
-                notasButton.Visible = (bool)stuff.examen;
+                notasButton.Visible = (bool)stuff.notas;
                 if (stuffwin.latest > Properties.Settings.Default.Version)
                 {
                     string seleccion = lxMessageBox.Show(stuffwin.cambios.ToString(), stuffwin.type.ToString(), lxMessageBox.Buttons.OKCancel, lxMessageBox.Icon.Warning, lxMessageBox.AnimateStyle.FadeIn).ToString();
@@ -163,7 +163,7 @@ namespace lxMeets
             e.Handled = true;
             try
             {
-                string url = @"https://api.lxndr.dev/uae/meets/exacto.php";
+                string url = @"https://api.lxndr.dev/uae/meets/exacto.php?ced=" + Properties.Settings.Default.Cedula;
                 var json = await client.DownloadStringTaskAsync(url);
                 dynamic stuff = JsonConvert.DeserializeObject(json);
                 if (stuff.materia.ToString() == "No hay nada por ahora")
@@ -173,7 +173,7 @@ namespace lxMeets
                     notifyIcon1.ShowBalloonTip(1000);
                     return;
                 }
-                OpenUrl1("https://apps.lxndr.dev/lxmeets/redirecter.php");
+                OpenUrl1(stuff.url.ToString());
             }
             catch { }
         }
@@ -245,7 +245,7 @@ namespace lxMeets
             cargandoAPI.Visible = true;
             try
             {
-                string url = @"https://api.lxndr.dev/uae/meets/?dia=" + comboBox1.GetItemText(comboBox1.SelectedItem);
+                string url = @"https://api.lxndr.dev/uae/meets/?dia=" + comboBox1.GetItemText(comboBox1.SelectedItem) + "&ced=" + Properties.Settings.Default.Cedula;
                 var client = new WebClient();
                 var json = await client.DownloadStringTaskAsync(url);
                 dynamic stuff = JsonConvert.DeserializeObject(json);
@@ -345,7 +345,7 @@ namespace lxMeets
         {
             try
             {
-                string url = @"https://api.lxndr.dev/uae/meets/exacto.php?hora=" + RoundUp(DateTime.Parse(DateTime.Now.ToString("HH") + ":" + DateTime.Now.ToString("mm") + ":00"), TimeSpan.FromMinutes(15)).ToShortTimeString();
+                string url = @"https://api.lxndr.dev/uae/meets/exacto.php?ced=" + Properties.Settings.Default.Cedula + "&hora=" + RoundUp(DateTime.Parse(DateTime.Now.ToString("HH") + ":" + DateTime.Now.ToString("mm") + ":00"), TimeSpan.FromMinutes(15)).ToShortTimeString();
                 var json = await client.DownloadStringTaskAsync(url);
                 dynamic stuff = JsonConvert.DeserializeObject(json);
                 if ((string)stuff.diff == "0" && (anteriorAsignatura == stuff.materia.ToString())) return;
@@ -375,7 +375,7 @@ namespace lxMeets
         {
             try
             {
-                string url = @"https://api.lxndr.dev/uae/meets/exacto.php";
+                string url = @"https://api.lxndr.dev/uae/meets/exacto.php?ced=" + Properties.Settings.Default.Cedula;
                 var json = await client.DownloadStringTaskAsync(url);
                 dynamic stuff = JsonConvert.DeserializeObject(json);
                 if ((string)stuff.diff == "0" && (anteriorAsignatura == stuff.materia.ToString())) return;
@@ -430,10 +430,6 @@ namespace lxMeets
             //Close();
             Hide();
             notifyIcon1.DoubleClick += OpenFromIcon;
-            notifyIcon1.BalloonTipTitle = "lxMeets sigue en funcionamiento";
-            notifyIcon1.BalloonTipText = "Doble click al icono para volverlo a abrir";
-            notifyIcon1.ShowBalloonTip(2000);
-            notifyIcon1.BalloonTipClicked += OpenFromIcon;
         }
         private void Settings_Click(object sender, EventArgs e)
         {

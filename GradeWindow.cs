@@ -16,7 +16,7 @@ namespace lxMeets
         public GradeWindow()
         {
             InitializeComponent();
-            if (Properties.Settings.Default.Cedula.Length > 2) { cedula = Properties.Settings.Default.Cedula; }
+            if (Properties.Settings.Default.Cedula.Length > 2 && Properties.Settings.Default.UseDefaultCed) { cedula = Properties.Settings.Default.Cedula; }
 
             else
             {

@@ -85,7 +85,7 @@ namespace lxMeets.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1.6")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1.7")]
         public decimal Version {
             get {
                 return ((decimal)(this["Version"]));
@@ -101,6 +101,18 @@ namespace lxMeets.Properties {
             }
             set {
                 this["Cedula"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool UseDefaultCed {
+            get {
+                return ((bool)(this["UseDefaultCed"]));
+            }
+            set {
+                this["UseDefaultCed"] = value;
             }
         }
     }
