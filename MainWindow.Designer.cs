@@ -1,7 +1,5 @@
-﻿namespace lxMeets
-{
-    partial class lxMeets
-    {
+﻿namespace lxMeets {
+    partial class lxMeets {
         /// <summary>
         ///  Required designer variable.
         /// </summary>
@@ -11,10 +9,8 @@
         ///  Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
+        protected override void Dispose(bool disposing) {
+            if (disposing && (components != null)) {
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -26,8 +22,7 @@
         ///  Required method for Designer support - do not modify
         ///  the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
-        {
+        private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(lxMeets));
             this.reloadButton = new System.Windows.Forms.Button();
@@ -39,6 +34,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.BarraTitulo = new System.Windows.Forms.Panel();
+            this.moodleButton = new System.Windows.Forms.Button();
             this.notasButton = new System.Windows.Forms.Button();
             this.githubButton = new System.Windows.Forms.Button();
             this.openlxndrButton = new System.Windows.Forms.Button();
@@ -139,6 +135,7 @@
             // BarraTitulo
             // 
             this.BarraTitulo.BackColor = System.Drawing.Color.Gray;
+            this.BarraTitulo.Controls.Add(this.moodleButton);
             this.BarraTitulo.Controls.Add(this.notasButton);
             this.BarraTitulo.Controls.Add(this.githubButton);
             this.BarraTitulo.Controls.Add(this.openlxndrButton);
@@ -153,6 +150,23 @@
             this.BarraTitulo.TabIndex = 6;
             this.BarraTitulo.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BarraTitulo_MouseDown);
             // 
+            // moodleButton
+            // 
+            this.moodleButton.BackColor = System.Drawing.Color.Transparent;
+            this.moodleButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("moodleButton.BackgroundImage")));
+            this.moodleButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.moodleButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.ForestGreen;
+            this.moodleButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.moodleButton.ForeColor = System.Drawing.Color.Gray;
+            this.moodleButton.Location = new System.Drawing.Point(491, 0);
+            this.moodleButton.Name = "moodleButton";
+            this.moodleButton.Size = new System.Drawing.Size(29, 25);
+            this.moodleButton.TabIndex = 8;
+            this.moodleButton.UseVisualStyleBackColor = false;
+            this.moodleButton.Visible = false;
+            this.moodleButton.Click += new System.EventHandler(this.moodleButton_Click);
+            this.moodleButton.MouseHover += new System.EventHandler(this.moodleButton_MouseHover);
+            // 
             // notasButton
             // 
             this.notasButton.BackColor = System.Drawing.Color.Transparent;
@@ -161,7 +175,7 @@
             this.notasButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Green;
             this.notasButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.notasButton.ForeColor = System.Drawing.Color.Gray;
-            this.notasButton.Location = new System.Drawing.Point(331, 0);
+            this.notasButton.Location = new System.Drawing.Point(342, 0);
             this.notasButton.Name = "notasButton";
             this.notasButton.Size = new System.Drawing.Size(29, 25);
             this.notasButton.TabIndex = 7;
@@ -210,7 +224,7 @@
             this.horarioexamButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.ForestGreen;
             this.horarioexamButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.horarioexamButton.ForeColor = System.Drawing.Color.Gray;
-            this.horarioexamButton.Location = new System.Drawing.Point(491, 0);
+            this.horarioexamButton.Location = new System.Drawing.Point(533, 0);
             this.horarioexamButton.Name = "horarioexamButton";
             this.horarioexamButton.Size = new System.Drawing.Size(29, 25);
             this.horarioexamButton.TabIndex = 7;
@@ -227,7 +241,7 @@
             this.horarioButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Green;
             this.horarioButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.horarioButton.ForeColor = System.Drawing.Color.Gray;
-            this.horarioButton.Location = new System.Drawing.Point(436, 0);
+            this.horarioButton.Location = new System.Drawing.Point(441, 0);
             this.horarioButton.Name = "horarioButton";
             this.horarioButton.Size = new System.Drawing.Size(29, 25);
             this.horarioButton.TabIndex = 7;
@@ -243,7 +257,7 @@
             this.settingsButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Green;
             this.settingsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.settingsButton.ForeColor = System.Drawing.Color.Gray;
-            this.settingsButton.Location = new System.Drawing.Point(377, 0);
+            this.settingsButton.Location = new System.Drawing.Point(391, 0);
             this.settingsButton.Name = "settingsButton";
             this.settingsButton.Size = new System.Drawing.Size(29, 25);
             this.settingsButton.TabIndex = 7;
@@ -328,6 +342,7 @@
         private System.Windows.Forms.PictureBox cargandoAPI;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem Cerrar;
+        private System.Windows.Forms.Button moodleButton;
     }
 }
 

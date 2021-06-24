@@ -6,25 +6,18 @@ using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-namespace lxMeets
-{
-    public partial class GradeWindow : Form
-    {
+namespace lxMeets {
+    public partial class GradeWindow : Form {
         private readonly WebClient client = new WebClient();
         string cedula = "";
         string anioLectivo = "";
-        public GradeWindow()
-        {
+        public GradeWindow() {
             InitializeComponent();
-            if (Properties.Settings.Default.Cedula.Length > 2 && Properties.Settings.Default.UseDefaultCed) { cedula = Properties.Settings.Default.Cedula; }
-
-            else
-            {
+            if (Properties.Settings.Default.Cedula.Length > 2 && Properties.Settings.Default.UseDefaultCed) { cedula = Properties.Settings.Default.Cedula; } else {
                 cedula = lxMessageInputBox.ShowDialog("Ingresar número de cédula", "Ingresar número de cédula", true);
                 anioLectivo = cedula.Split('[', ']')[1];
                 cedula = cedula.Split('(', ')')[1];
-                while ((cedula.Length < 9 && cedula.Length > 0) || !Regex.IsMatch(cedula, @"^\d+$"))
-                {
+                while ((cedula.Length < 9 && cedula.Length > 0) || !Regex.IsMatch(cedula, @"^\d+$")) {
 
                     if (cedula == "Cancel") break;
                     MessageBox.Show("Cédula Inválida"); cedula = lxMessageInputBox.ShowDialog("Ingresar número de cédula", "Ingresar número de cédula");
@@ -35,10 +28,8 @@ namespace lxMeets
 
         }
 
-        private async void FetchAPI(string cedula, string anioLect)
-        {
-            try
-            {
+        private async void FetchAPI(string cedula, string anioLect) {
+            try {
                 carreraLabel.Visible = false;
                 nombresLabel.Visible = false;
                 label1.Visible = false;
@@ -65,12 +56,10 @@ namespace lxMeets
                 facultadLabel.Visible = true;
                 tablaPromedio.Visible = true;
                 cargandoPicture.Visible = false;
-            }
-            catch (Exception e) { }
+            } catch (Exception e) { }
         }
 
-        private void GenerateTable(int rowCount, int columnCount, TableLayoutPanel tableController, dynamic stuff, string tipo)
-        {
+        private void GenerateTable(int rowCount, int columnCount, TableLayoutPanel tableController, dynamic stuff, string tipo) {
             tableController.Controls.Clear();
             tableController.ColumnStyles.Clear();
             tableController.RowStyles.Clear();
@@ -78,23 +67,18 @@ namespace lxMeets
             tableController.ColumnCount = columnCount;
             tableController.RowCount = rowCount;
 
-            for (int x = 0; x < columnCount; x++)
-            {
+            for (int x = 0; x < columnCount; x++) {
                 tableController.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
 
-                for (int y = 0; y < rowCount; y++)
-                {
-                    if (x == 0)
-                    {
+                for (int y = 0; y < rowCount; y++) {
+                    if (x == 0) {
                         tableController.RowStyles.Add(new RowStyle(SizeType.AutoSize));
                     }
 
-                    Label cmd = new Label
-                    {
+                    Label cmd = new Label {
                         AutoSize = true
                     };
-                    if (y == 0)
-                    {
+                    if (y == 0) {
                         cmd.AutoSize = false;
                         cmd.TextAlign = ContentAlignment.MiddleCenter;
                         cmd.Font = new Font(cmd.Font, FontStyle.Bold);
@@ -108,13 +92,11 @@ namespace lxMeets
             }
         }
 
-        private void OtraCButton_Click(object sender, EventArgs e)
-        {
+        private void OtraCButton_Click(object sender, EventArgs e) {
             cedula = lxMessageInputBox.ShowDialog("Ingresar número de cédula", "Ingresar número de cédula", true);
             anioLectivo = cedula.Split('[', ']')[1];
             cedula = cedula.Split('(', ')')[1];
-            while ((cedula.Length < 9 && cedula.Length > 0) || !Regex.IsMatch(cedula, @"^\d+$"))
-            {
+            while ((cedula.Length < 9 && cedula.Length > 0) || !Regex.IsMatch(cedula, @"^\d+$")) {
                 if (cedula == "Cancel") break;
                 MessageBox.Show("Cédula Inválida"); cedula = lxMessageInputBox.ShowDialog("Ingresar número de cédula", "Ingresar número de cédula");
             }
@@ -125,8 +107,7 @@ namespace lxMeets
             FetchAPI(cedula, anioLectivo);
         }
 
-        private void GradeWindow_Shown(object sender, EventArgs e)
-        {
+        private void GradeWindow_Shown(object sender, EventArgs e) {
             if (cedula == "Cancel") this.Close();
         }
 
@@ -135,14 +116,12 @@ namespace lxMeets
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
         private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int lParam);
 
-        private void BarraTitulo_MouseDown(object sender, MouseEventArgs e)
-        {
+        private void BarraTitulo_MouseDown(object sender, MouseEventArgs e) {
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
 
-        private void CerrarButton_Click(object sender, EventArgs e)
-        {
+        private void CerrarButton_Click(object sender, EventArgs e) {
             this.Close();
         }
     }

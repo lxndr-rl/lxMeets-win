@@ -5,11 +5,10 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using TheArtOfDev.HtmlRenderer.WinForms;
 
-namespace lxMsgBox
-{
-    class lxMessageBox : Form
-    {
+namespace lxMsgBox {
+    class lxMessageBox : Form {
         private const int CS_DROPSHADOW = 0x00020000;
         private static lxMessageBox _msgBox;
         private Panel _plHeader = new Panel();
@@ -18,7 +17,7 @@ namespace lxMsgBox
         private PictureBox _picIcon = new PictureBox();
         private FlowLayoutPanel _flpButtons = new FlowLayoutPanel();
         private Label _lblTitle;
-        private Label _lblMessage;
+        private HtmlPanel _lblMessage = new HtmlPanel();
         private List<Button> _buttonCollection = new List<Button>();
         private static DialogResult _buttonResult = new DialogResult();
         private static Timer _timer;
@@ -27,12 +26,11 @@ namespace lxMsgBox
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         private static extern bool MessageBeep(uint type);
 
-        private lxMessageBox()
-        {
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+        private lxMessageBox() {
+            this.FormBorderStyle = FormBorderStyle.None;
             this.BackColor = Color.FromArgb(45, 45, 48);
             this.StartPosition = FormStartPosition.CenterScreen;
-            this.Padding = new System.Windows.Forms.Padding(3);
+            this.Padding = new Padding(3);
             this.Width = 200;
 
             _lblTitle = new Label();
@@ -41,9 +39,9 @@ namespace lxMsgBox
             _lblTitle.Dock = DockStyle.Top;
             _lblTitle.Height = 50;
 
-            _lblMessage = new Label();
             _lblMessage.ForeColor = Color.White;
-            _lblMessage.Font = new System.Drawing.Font("Segoe UI", 10);
+            _lblMessage.BackColor = BackColor;
+            _lblMessage.Font = new Font("Segoe UI", 10);
             _lblMessage.Dock = DockStyle.Fill;
 
             _flpButtons.FlowDirection = FlowDirection.RightToLeft;
@@ -69,37 +67,13 @@ namespace lxMsgBox
             controlCollection.Add(_plHeader);
             controlCollection.Add(_plFooter);
 
-            foreach (Control control in controlCollection)
-            {
-                control.MouseDown += AnimtedMsgBox_MouseDown;
-                control.MouseMove += AnimtedMsgBox_MouseMove;
-            }
-
             this.Controls.Add(_plHeader);
             this.Controls.Add(_plIcon);
             this.Controls.Add(_plFooter);
         }
 
-        private static void AnimtedMsgBox_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                lastMousePos = new Point(e.X, e.Y);
-            }
-        }
 
-
-        private static void AnimtedMsgBox_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                _msgBox.Left += e.X - lastMousePos.X;
-                _msgBox.Top += e.Y - lastMousePos.Y;
-            }
-        }
-
-        public static DialogResult Show(string message)
-        {
+        public static DialogResult Show(string message) {
             _msgBox = new lxMessageBox();
             _msgBox._lblMessage.Text = message;
 
@@ -110,8 +84,7 @@ namespace lxMsgBox
             return _buttonResult;
         }
 
-        public static DialogResult Show(string message, string title)
-        {
+        public static DialogResult Show(string message, string title) {
             _msgBox = new lxMessageBox();
             _msgBox._lblMessage.Text = message;
             _msgBox._lblTitle.Text = title;
@@ -124,8 +97,7 @@ namespace lxMsgBox
             return _buttonResult;
         }
 
-        public static DialogResult Show(string message, string title, Buttons buttons)
-        {
+        public static DialogResult Show(string message, string title, Buttons buttons) {
             _msgBox = new lxMessageBox();
             _msgBox._lblMessage.Text = message;
             _msgBox._lblTitle.Text = title;
@@ -139,8 +111,7 @@ namespace lxMsgBox
             return _buttonResult;
         }
 
-        public static DialogResult Show(string message, string title, Buttons buttons, Icon icon)
-        {
+        public static DialogResult Show(string message, string title, Buttons buttons, Icon icon) {
             _msgBox = new lxMessageBox();
             _msgBox._lblMessage.Text = message;
             _msgBox._lblTitle.Text = title;
@@ -153,8 +124,7 @@ namespace lxMsgBox
             return _buttonResult;
         }
 
-        public static DialogResult Show(string message, string title, Buttons buttons, Icon icon, AnimateStyle style)
-        {
+        public static DialogResult Show(string message, string title, Buttons buttons, Icon icon, AnimateStyle style) {
             _msgBox = new lxMessageBox();
             _msgBox._lblMessage.Text = message;
             _msgBox._lblTitle.Text = title;
@@ -165,8 +135,7 @@ namespace lxMsgBox
             _timer = new Timer();
             Size formSize = lxMessageBox.MessageSize(message);
 
-            switch (style)
-            {
+            switch (style) {
                 case lxMessageBox.AnimateStyle.SlideDown:
                     _msgBox.Size = new Size(formSize.Width, 0);
                     _timer.Interval = 1;
@@ -195,47 +164,37 @@ namespace lxMsgBox
             return _buttonResult;
         }
 
-        static void timer_Tick(object sender, EventArgs e)
-        {
+        static void timer_Tick(object sender, EventArgs e) {
             Timer timer = (Timer)sender;
             ApplyAnimation animate = (ApplyAnimation)timer.Tag;
 
-            switch (animate.Style)
-            {
+            switch (animate.Style) {
                 case lxMessageBox.AnimateStyle.SlideDown:
-                    if (_msgBox.Height < animate.FormSize.Height)
-                    {
+                    if (_msgBox.Height < animate.FormSize.Height) {
                         _msgBox.Height += 17;
                         _msgBox.Invalidate();
-                    }
-                    else
-                    {
+                    } else {
                         _timer.Stop();
                         _timer.Dispose();
                     }
                     break;
 
                 case lxMessageBox.AnimateStyle.FadeIn:
-                    if (_msgBox.Opacity < 1)
-                    {
+                    if (_msgBox.Opacity < 1) {
                         _msgBox.Opacity += 0.1;
                         _msgBox.Invalidate();
-                    }
-                    else
-                    {
+                    } else {
                         _timer.Stop();
                         _timer.Dispose();
                     }
                     break;
 
                 case lxMessageBox.AnimateStyle.ZoomIn:
-                    if (_msgBox.Width > animate.FormSize.Width)
-                    {
+                    if (_msgBox.Width > animate.FormSize.Width) {
                         _msgBox.Width -= 17;
                         _msgBox.Invalidate();
                     }
-                    if (_msgBox.Height > animate.FormSize.Height)
-                    {
+                    if (_msgBox.Height > animate.FormSize.Height) {
                         _msgBox.Height -= 17;
                         _msgBox.Invalidate();
                     }
@@ -243,10 +202,8 @@ namespace lxMsgBox
             }
         }
 
-        private static void InitButtons(Buttons buttons)
-        {
-            switch (buttons)
-            {
+        private static void InitButtons(Buttons buttons) {
+            switch (buttons) {
                 case lxMessageBox.Buttons.AbortRetryIgnore:
                     _msgBox.InitAbortRetryIgnoreButtons();
                     break;
@@ -272,8 +229,7 @@ namespace lxMsgBox
                     break;
             }
 
-            foreach (Button btn in _msgBox._buttonCollection)
-            {
+            foreach (Button btn in _msgBox._buttonCollection) {
                 btn.ForeColor = Color.FromArgb(170, 170, 170);
                 btn.Font = new System.Drawing.Font("Segoe UI", 8);
                 btn.Padding = new Padding(3);
@@ -285,10 +241,8 @@ namespace lxMsgBox
             }
         }
 
-        private static void InitIcon(Icon icon)
-        {
-            switch (icon)
-            {
+        private static void InitIcon(Icon icon) {
+            switch (icon) {
                 case lxMessageBox.Icon.Application:
                     _msgBox._picIcon.Image = SystemIcons.Application.ToBitmap();
                     break;
@@ -319,8 +273,7 @@ namespace lxMsgBox
             }
         }
 
-        private void InitAbortRetryIgnoreButtons()
-        {
+        private void InitAbortRetryIgnoreButtons() {
             Button btnAbort = new Button();
             btnAbort.Text = "Abort";
             btnAbort.Click += ButtonClick;
@@ -338,8 +291,7 @@ namespace lxMsgBox
             this._buttonCollection.Add(btnIgnore);
         }
 
-        private void InitOKButton()
-        {
+        private void InitOKButton() {
             Button btnOK = new Button();
             btnOK.Text = "Aceptar";
             btnOK.Click += ButtonClick;
@@ -347,8 +299,7 @@ namespace lxMsgBox
             this._buttonCollection.Add(btnOK);
         }
 
-        private void InitOKCancelButtons()
-        {
+        private void InitOKCancelButtons() {
             Button btnOK = new Button();
             btnOK.Text = "Actualizar";
             btnOK.Click += ButtonClick;
@@ -362,8 +313,7 @@ namespace lxMsgBox
             this._buttonCollection.Add(btnCancel);
         }
 
-        private void InitRetryCancelButtons()
-        {
+        private void InitRetryCancelButtons() {
             Button btnRetry = new Button();
             btnRetry.Text = "OK";
             btnRetry.Click += ButtonClick;
@@ -377,8 +327,7 @@ namespace lxMsgBox
             this._buttonCollection.Add(btnCancel);
         }
 
-        private void InitYesNoButtons()
-        {
+        private void InitYesNoButtons() {
             Button btnYes = new Button();
             btnYes.Text = "Yes";
             btnYes.Click += ButtonClick;
@@ -392,8 +341,7 @@ namespace lxMsgBox
             this._buttonCollection.Add(btnNo);
         }
 
-        private void InitYesNoCancelButtons()
-        {
+        private void InitYesNoCancelButtons() {
             Button btnYes = new Button();
             btnYes.Text = "Abrir";
             btnYes.Click += ButtonClick;
@@ -411,12 +359,10 @@ namespace lxMsgBox
             this._buttonCollection.Add(btnCancel);
         }
 
-        private static void ButtonClick(object sender, EventArgs e)
-        {
+        private static void ButtonClick(object sender, EventArgs e) {
             Button btn = (Button)sender;
 
-            switch (btn.Text)
-            {
+            switch (btn.Text) {
                 case "Abort":
                     _buttonResult = DialogResult.Abort;
                     break;
@@ -449,23 +395,18 @@ namespace lxMsgBox
             _msgBox.Dispose();
         }
 
-        private static Size MessageSize(string message)
-        {
+        private static Size MessageSize(string message) {
             Graphics g = _msgBox.CreateGraphics();
             int width = 350;
-            int height = 230;
+            int height = 260;
 
             SizeF size = g.MeasureString(message, new System.Drawing.Font("Segoe UI", 10));
 
-            if (message.Length < 150)
-            {
-                if ((int)size.Width > 350)
-                {
+            if (message.Length < 150) {
+                if ((int)size.Width > 350) {
                     width = (int)size.Width;
                 }
-            }
-            else
-            {
+            } else {
                 string[] groups = (from Match m in Regex.Matches(message, ".{1,180}") select m.Value).ToArray();
                 int lines = groups.Length;
                 width = 490;
@@ -474,10 +415,8 @@ namespace lxMsgBox
             return new Size(width, height);
         }
 
-        protected override CreateParams CreateParams
-        {
-            get
-            {
+        protected override CreateParams CreateParams {
+            get {
                 CreateParams cp = base.CreateParams;
                 cp.ClassStyle |= CS_DROPSHADOW;
                 return cp;
@@ -485,8 +424,7 @@ namespace lxMsgBox
         }
 
 
-        public enum Buttons
-        {
+        public enum Buttons {
             AbortRetryIgnore = 1,
             OK = 2,
             OKCancel = 3,
@@ -495,8 +433,7 @@ namespace lxMsgBox
             YesNoCancel = 6
         }
 
-        public enum Icon
-        {
+        public enum Icon {
             Application = 1,
             Exclamation = 2,
             Error = 3,
@@ -507,26 +444,22 @@ namespace lxMsgBox
             Search = 8
         }
 
-        public enum AnimateStyle
-        {
+        public enum AnimateStyle {
             SlideDown = 1,
             FadeIn = 2,
             ZoomIn = 3
         }
-        class ApplyAnimation
-        {
+        class ApplyAnimation {
             public Size FormSize;
             public lxMessageBox.AnimateStyle Style;
 
-            public ApplyAnimation(Size formSize, lxMessageBox.AnimateStyle style)
-            {
+            public ApplyAnimation(Size formSize, lxMessageBox.AnimateStyle style) {
                 this.FormSize = formSize;
                 this.Style = style;
             }
         }
 
-        private void InitializeComponent()
-        {
+        private void InitializeComponent() {
             this.SuspendLayout();
             // 
             // lxMessageBox

@@ -85,7 +85,7 @@ namespace lxMeets.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1.7")]
+        [global::System.Configuration.DefaultSettingValueAttribute("2.0")]
         public decimal Version {
             get {
                 return ((decimal)(this["Version"]));
@@ -113,6 +113,42 @@ namespace lxMeets.Properties {
             }
             set {
                 this["UseDefaultCed"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Usuario {
+            get {
+                return ((string)(this["Usuario"]));
+            }
+            set {
+                this["Usuario"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Contrasena {
+            get {
+                return ((string)(this["Contrasena"]));
+            }
+            set {
+                this["Contrasena"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool UseDefaultUser {
+            get {
+                return ((bool)(this["UseDefaultUser"]));
+            }
+            set {
+                this["UseDefaultUser"] = value;
             }
         }
     }

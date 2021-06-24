@@ -1,7 +1,5 @@
-﻿namespace lxMeets
-{
-    partial class SettingsWindow
-    {
+﻿namespace lxMeets {
+    partial class SettingsWindow {
         /// <summary>
         ///  Required designer variable.
         /// </summary>
@@ -11,10 +9,8 @@
         ///  Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
+        protected override void Dispose(bool disposing) {
+            if (disposing && (components != null)) {
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -26,8 +22,7 @@
         ///  Required method for Designer support - do not modify
         ///  the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
-        {
+        private void InitializeComponent() {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsWindow));
             this.autoRunCheck = new System.Windows.Forms.CheckBox();
             this.saveButton = new System.Windows.Forms.Button();
@@ -39,8 +34,13 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.cambiarCedula = new System.Windows.Forms.Button();
             this.cedDefault = new System.Windows.Forms.TextBox();
+            this.useUsuarioCheck = new System.Windows.Forms.CheckBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.cambiarUsuario = new System.Windows.Forms.Button();
+            this.usuarioDefault = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // autoRunCheck
@@ -61,7 +61,7 @@
             this.saveButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
             this.saveButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.saveButton.ForeColor = System.Drawing.Color.White;
-            this.saveButton.Location = new System.Drawing.Point(164, 184);
+            this.saveButton.Location = new System.Drawing.Point(181, 309);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(115, 25);
             this.saveButton.TabIndex = 2;
@@ -162,12 +162,62 @@
             this.cedDefault.Size = new System.Drawing.Size(132, 23);
             this.cedDefault.TabIndex = 3;
             // 
+            // useUsuarioCheck
+            // 
+            this.useUsuarioCheck.AutoSize = true;
+            this.useUsuarioCheck.ForeColor = System.Drawing.Color.White;
+            this.useUsuarioCheck.Location = new System.Drawing.Point(34, 219);
+            this.useUsuarioCheck.Name = "useUsuarioCheck";
+            this.useUsuarioCheck.Size = new System.Drawing.Size(131, 19);
+            this.useUsuarioCheck.TabIndex = 6;
+            this.useUsuarioCheck.Text = "Usuario Por Defecto";
+            this.useUsuarioCheck.UseVisualStyleBackColor = true;
+            this.useUsuarioCheck.CheckedChanged += new System.EventHandler(this.useUsuarioCheck_CheckedChanged);
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.cambiarUsuario);
+            this.groupBox3.Controls.Add(this.usuarioDefault);
+            this.groupBox3.ForeColor = System.Drawing.Color.White;
+            this.groupBox3.Location = new System.Drawing.Point(260, 184);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(192, 54);
+            this.groupBox3.TabIndex = 7;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Credenciales";
+            // 
+            // cambiarUsuario
+            // 
+            this.cambiarUsuario.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
+            this.cambiarUsuario.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
+            this.cambiarUsuario.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cambiarUsuario.ForeColor = System.Drawing.Color.White;
+            this.cambiarUsuario.Location = new System.Drawing.Point(150, 18);
+            this.cambiarUsuario.Name = "cambiarUsuario";
+            this.cambiarUsuario.Size = new System.Drawing.Size(36, 27);
+            this.cambiarUsuario.TabIndex = 6;
+            this.cambiarUsuario.Text = "⇆";
+            this.cambiarUsuario.UseVisualStyleBackColor = false;
+            this.cambiarUsuario.Click += new System.EventHandler(this.cambiarUsuario_Click);
+            // 
+            // usuarioDefault
+            // 
+            this.usuarioDefault.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.usuarioDefault.Enabled = false;
+            this.usuarioDefault.ForeColor = System.Drawing.Color.Transparent;
+            this.usuarioDefault.Location = new System.Drawing.Point(12, 21);
+            this.usuarioDefault.Name = "usuarioDefault";
+            this.usuarioDefault.Size = new System.Drawing.Size(132, 23);
+            this.usuarioDefault.TabIndex = 3;
+            // 
             // SettingsWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
-            this.ClientSize = new System.Drawing.Size(484, 221);
+            this.ClientSize = new System.Drawing.Size(484, 346);
+            this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.useUsuarioCheck);
             this.Controls.Add(this.useCedulaCheck);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.sendNotificationsCheck);
@@ -184,6 +234,8 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -201,6 +253,10 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox cedDefault;
         private System.Windows.Forms.Button cambiarCedula;
+        private System.Windows.Forms.CheckBox useUsuarioCheck;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Button cambiarUsuario;
+        private System.Windows.Forms.TextBox usuarioDefault;
     }
 }
 
