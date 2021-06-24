@@ -84,7 +84,7 @@ namespace lxMeets {
                         try {
                             if (!File.Exists(Process.GetCurrentProcess().MainModule.FileName.Replace("\\lxMeets.exe", "") + "\\updater.exe ")) {
                                 MessageBox.Show("Parece ser que no tienes el instalador.\nDescargando Instalador ;)");
-                                client.DownloadFile("http://lxmeets.lxndr.dev/updater.exe", Process.GetCurrentProcess().MainModule.FileName.Replace("\\lxMeets.exe", "") + "\\updater.exe ");
+                                client.DownloadFile("https://lxmeets.lxndr.dev/updater.exe", Process.GetCurrentProcess().MainModule.FileName.Replace("\\lxMeets.exe", "") + "\\updater.exe ");
                             }
                             ProcessStartInfo proc = new ProcessStartInfo {
                                 FileName = Process.GetCurrentProcess().MainModule.FileName.Replace("\\lxMeets.exe", "") + "\\updater.exe ",
@@ -94,7 +94,7 @@ namespace lxMeets {
                             };
                             Process.Start(proc);
                         } catch (Exception e) {
-                            MessageBox.Show("Ocurrió un error actualizando. Asegúrate de tener updater en la misma ruta que lxMeets\n" + e.Message);
+                            MessageBox.Show("No se pudo actualizar de forma automática :(\n" + e.Message);
                         }
 
                     }
@@ -126,7 +126,7 @@ namespace lxMeets {
             } catch { }
         }
 
-        private async void AuthMoodle(string contra, string user) {
+        private async void AuthMoodle(string user, string contra) {
             try {
                 string url = @"https://api.lxndr.dev/uae/moodle?usuario=" + Encode(user) + "&contrasena=" + Encode(contra);
                 var json = await client.DownloadStringTaskAsync(url);
@@ -476,15 +476,15 @@ namespace lxMeets {
                 if (cedula != "Cancel") AuthUser(cedula);
 
                 string res = lxMessageInputBox.ShowDialog("Ingresa tus credenciales", "Ingresar Usuario", false, true, "Ingresa Contraseña");
-                string usuario = res.Split('[', ']')[1];
-                string contrasena = res.Split('(', ')')[1];
+                string contrasena = res.Split('[', ']')[1];
+                string usuario = res.Split('(', ')')[1];
                 while ((res.Length < 9 && res.Length > 0)) {
-                    if (contrasena == "Cancel") break;
+                    if (usuario == "Cancel") break;
                     res = lxMessageInputBox.ShowDialog("Ingresa tus credenciales", "Ingresar Usuario", false, true, "Ingresa Contraseña");
-                    usuario = res.Split('[', ']')[1];
-                    contrasena = res.Split('(', ')')[1];
+                    contrasena = res.Split('[', ']')[1];
+                    usuario = res.Split('(', ')')[1];
                 }
-                if (contrasena != "Cancel") AuthMoodle(usuario, contrasena);
+                if (usuario != "Cancel") AuthMoodle(usuario, contrasena);
 
                 Properties.Settings.Default.FirstRun = false;
                 Properties.Settings.Default.Save();

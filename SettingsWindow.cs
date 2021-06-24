@@ -67,7 +67,6 @@ namespace lxMeets {
         private void useCedulaCheck_CheckedChanged(object sender, EventArgs e) {
             Properties.Settings.Default.UseDefaultCed = useCedulaCheck.Checked;
             Properties.Settings.Default.Save();
-
         }
 
         private async void AuthUser(string cedula) {

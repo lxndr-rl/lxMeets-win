@@ -25,16 +25,16 @@ namespace lxMeets {
                 decoded = false;
             } else {
                 res = lxMessageInputBox.ShowDialog("Ingresa tus credenciales", "Ingresar Usuario", false, true, "Ingresa Contraseña");
-                usuario = res.Split('[', ']')[1];
-                contrasena = res.Split('(', ')')[1];
+                contrasena = res.Split('[', ']')[1];
+                usuario = res.Split('(', ')')[1];
                 while ((res.Length < 9 && res.Length > 0)) {
-                    if (contrasena == "Cancel") break;
+                    if (usuario == "Cancel") break;
                     res = lxMessageInputBox.ShowDialog("Ingresa tus credenciales", "Ingresar Usuario", false, true, "Ingresa Contraseña");
-                    usuario = res.Split('[', ']')[1];
-                    contrasena = res.Split('(', ')')[1];
+                    contrasena = res.Split('[', ']')[1];
+                    usuario = res.Split('(', ')')[1];
                 }
             }
-            if (contrasena != "Cancel") FetchAPI(usuario, contrasena, decoded);
+            if (usuario != "Cancel") FetchAPI(usuario, contrasena, decoded);
         }
 
         public static string Encode(string plainText) {
@@ -214,7 +214,7 @@ namespace lxMeets {
         }
 
         private void AssigmentWindow_Shown(object sender, EventArgs e) {
-            if (contrasena == "Cancel") Close();
+            if (usuario == "Cancel") Close();
         }
     }
 }

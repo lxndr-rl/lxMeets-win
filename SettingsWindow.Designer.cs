@@ -166,7 +166,7 @@
             // 
             this.useUsuarioCheck.AutoSize = true;
             this.useUsuarioCheck.ForeColor = System.Drawing.Color.White;
-            this.useUsuarioCheck.Location = new System.Drawing.Point(34, 219);
+            this.useUsuarioCheck.Location = new System.Drawing.Point(34, 233);
             this.useUsuarioCheck.Name = "useUsuarioCheck";
             this.useUsuarioCheck.Size = new System.Drawing.Size(131, 19);
             this.useUsuarioCheck.TabIndex = 6;
@@ -179,7 +179,7 @@
             this.groupBox3.Controls.Add(this.cambiarUsuario);
             this.groupBox3.Controls.Add(this.usuarioDefault);
             this.groupBox3.ForeColor = System.Drawing.Color.White;
-            this.groupBox3.Location = new System.Drawing.Point(260, 184);
+            this.groupBox3.Location = new System.Drawing.Point(260, 210);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(192, 54);
             this.groupBox3.TabIndex = 7;
