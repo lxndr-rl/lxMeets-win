@@ -124,7 +124,7 @@ namespace lxMeets {
                     return;
                 }
                 try {
-                    string url = @"https://api.lxndr.dev/uae/notas/anioLect.php?ced=" + cedula;
+                    string url = @"https://api.lxndr.dev/uae/notas/anioLect?ced=" + cedula;
                     var client = new WebClient();
                     var json = await client.DownloadStringTaskAsync(url);
                     dynamic stuff = JsonConvert.DeserializeObject(json);
